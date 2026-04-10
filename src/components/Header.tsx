@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { useTheme } from '@/hooks/use-theme'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import logoWhite from '@/assets/images/portalsync_branco_transp.png'
-import logoBlack from '@/assets/images/logo_preto.png'
+import logoBlack from '@/assets/images/logo_preto-removebg-preview.png'
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
@@ -58,7 +58,7 @@ export function Header() {
             <img 
               src={theme === 'light' ? logoBlack : logoWhite} 
               alt="PortalSync" 
-              className="h-10 w-auto object-contain"
+              className="h-16 w-auto object-contain"
             />
           </motion.div>
 
