@@ -122,22 +122,63 @@ const generateConnections = (): Connection[] => {
 
 export function WorldMap() {
   const connections = useRef(generateConnections()).current
+  const svgRef = useRef<SVGSVGElement>(null)
+
+  useEffect(() => {
+    if (!svgRef.current) return
+
+    const svg = svgRef.current
+    const lines = svg.querySelectorAll('.animated-line')
+    
+    lines.forEach((line, index) => {
+      const element = line as SVGLineElement
+      const connection = connections[index]
+      if (!connection) return
+
+      const length = Math.sqrt(
+        Math.pow(connection.to.x - connection.from.x, 2) +
+          Math.pow(connection.to.y - connection.from.y, 2)
+      )
+
+      element.style.strokeDasharray = `${length}`
+      element.style.strokeDashoffset = `${length}`
+
+      const animate = () => {
+        element.animate(
+          [
+            { strokeDashoffset: length },
+            { strokeDashoffset: 0 },
+            { strokeDashoffset: -length }
+          ],
+          {
+            duration: connection.duration * 1000,
+            delay: connection.delay * 1000,
+            iterations: Infinity,
+            easing: 'linear'
+          }
+        )
+      }
+
+      setTimeout(animate, 0)
+    })
+  }, [connections])
 
   return (
-    <div className="absolute inset-0 overflow-hidden opacity-30 pointer-events-none" style={{ zIndex: 0 }}>
+    <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 0 }}>
       <svg
-        className="w-full h-full"
+        ref={svgRef}
+        className="w-full h-full opacity-60"
         viewBox="0 0 900 400"
         preserveAspectRatio="xMidYMid slice"
       >
         <defs>
           <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="var(--primary)" stopOpacity="0" />
-            <stop offset="50%" stopColor="var(--accent)" stopOpacity="0.8" />
-            <stop offset="100%" stopColor="var(--primary)" stopOpacity="0" />
+            <stop offset="0%" stopColor="var(--primary)" stopOpacity="0.2" />
+            <stop offset="50%" stopColor="var(--accent)" stopOpacity="1" />
+            <stop offset="100%" stopColor="var(--primary)" stopOpacity="0.2" />
           </linearGradient>
           <filter id="glow">
-            <feGaussianBlur stdDeviation="1.5" result="coloredBlur" />
+            <feGaussianBlur stdDeviation="2" result="coloredBlur" />
             <feMerge>
               <feMergeNode in="coloredBlur" />
               <feMergeNode in="SourceGraphic" />
@@ -145,70 +186,35 @@ export function WorldMap() {
           </filter>
         </defs>
 
-        {connections.slice(0, 30).map((connection, index) => {
-          const length = Math.sqrt(
-            Math.pow(connection.to.x - connection.from.x, 2) +
-              Math.pow(connection.to.y - connection.from.y, 2)
-          )
-
-          return (
-            <g key={index}>
-              <motion.line
-                x1={connection.from.x}
-                y1={connection.from.y}
-                x2={connection.to.x}
-                y2={connection.to.y}
-                stroke="url(#lineGradient)"
-                strokeWidth="1.5"
-                strokeDasharray={length}
-                strokeDashoffset={length}
-                animate={{
-                  strokeDashoffset: [length, 0, -length],
-                }}
-                transition={{
-                  duration: connection.duration,
-                  delay: connection.delay,
-                  repeat: Infinity,
-                  ease: 'linear',
-                }}
-                filter="url(#glow)"
-              />
-            </g>
-          )
-        })}
+        {connections.slice(0, 25).map((connection, index) => (
+          <line
+            key={index}
+            className="animated-line"
+            x1={connection.from.x}
+            y1={connection.from.y}
+            x2={connection.to.x}
+            y2={connection.to.y}
+            stroke="url(#lineGradient)"
+            strokeWidth="2"
+            filter="url(#glow)"
+          />
+        ))}
 
         {cities.map((city, index) => (
           <g key={index}>
             <circle
               cx={city.x}
               cy={city.y}
-              r="2.5"
+              r="3"
               fill="var(--accent)"
-              opacity="0.8"
+              opacity="0.9"
+              filter="url(#glow)"
             />
-            {index % 5 === 0 && (
-              <motion.circle
-                cx={city.x}
-                cy={city.y}
-                r="5"
-                fill="none"
-                stroke="var(--primary)"
-                strokeWidth="1"
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: [1, 2.5], opacity: [0.6, 0] }}
-                transition={{
-                  duration: 3,
-                  delay: index * 0.1,
-                  repeat: Infinity,
-                  repeatDelay: 5,
-                }}
-              />
-            )}
           </g>
         ))}
       </svg>
 
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/40" />
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
     </div>
   )
 }
