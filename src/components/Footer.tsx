@@ -29,7 +29,7 @@ export function Footer() {
   ]
 
   return (
-    <footer className="bg-muted/50 border-t border-border py-8 relative overflow-hidden">
+    <footer className="bg-muted/50 border-t border-border pt-4 pb-8 relative overflow-hidden">
       <motion.div
         className="absolute top-0 left-0 w-96 h-96 rounded-full bg-primary/5 blur-3xl"
         animate={{
