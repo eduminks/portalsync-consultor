@@ -48,7 +48,7 @@ export function Footer() {
               <img 
                 src={theme === 'dark' ? logoWhite : logoBlack} 
                 alt="PortalSync" 
-                className="h-16 w-auto object-contain"
+                className="h-32 w-auto object-contain"
               />
             </motion.div>
             <p className="text-muted-foreground">
