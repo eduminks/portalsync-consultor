@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowDown, Rocket, Code, Terminal, BracketsCurly, GitBranch } from '@phosphor-icons/react'
 import { Button } from '@/components/ui/button'
 import { useEffect, useState, useRef } from 'react'
+import { useTheme } from '@/hooks/use-theme'
 
 interface MatrixColumn {
   id: number
@@ -24,6 +25,7 @@ export function Hero() {
   const { scrollY } = useScroll()
   const y = useTransform(scrollY, [0, 500], [0, 150])
   const opacity = useTransform(scrollY, [0, 300], [1, 0])
+  const { theme } = useTheme()
   
   const [matrixColumns, setMatrixColumns] = useState<MatrixColumn[]>([])
   const [binaryParticles, setBinaryParticles] = useState<BinaryParticle[]>([])
@@ -107,24 +109,26 @@ export function Hero() {
     }
   }
 
+  const isCyberpunk = theme === 'cyberpunk'
+
   return (
     <section
       id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5" />
+      <div className={`absolute inset-0 ${isCyberpunk ? 'bg-gradient-to-br from-primary/10 via-background to-accent/10' : 'bg-gradient-to-br from-primary/5 via-background to-accent/5'}`} />
       
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 w-full h-full opacity-30"
+        className={`absolute inset-0 w-full h-full ${isCyberpunk ? 'opacity-50' : 'opacity-30'}`}
       />
 
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,var(--primary)_0%,transparent_50%)] opacity-20 blur-3xl" />
+      <div className={`absolute inset-0 ${isCyberpunk ? 'bg-[radial-gradient(circle_at_50%_50%,var(--primary)_0%,transparent_50%)] opacity-40' : 'bg-[radial-gradient(circle_at_50%_50%,var(--primary)_0%,transparent_50%)] opacity-20'} blur-3xl`} />
       
       {matrixColumns.map((column) => (
         <motion.div
           key={column.id}
-          className="absolute top-0 font-mono text-xs text-primary/40 whitespace-pre"
+          className={`absolute top-0 font-mono text-xs whitespace-pre ${isCyberpunk ? 'text-primary/60' : 'text-primary/40'}`}
           style={{
             left: `${column.x}%`,
           }}
@@ -148,7 +152,7 @@ export function Hero() {
       {binaryParticles.map((particle) => (
         <motion.div
           key={particle.id}
-          className="absolute font-mono text-xl font-bold"
+          className={`absolute font-mono text-xl font-bold ${isCyberpunk ? 'drop-shadow-[0_0_10px_var(--primary)]' : ''}`}
           style={{
             left: `${particle.x}%`,
             top: `${particle.y}%`,
@@ -171,7 +175,7 @@ export function Hero() {
       ))}
       
       <motion.div 
-        className="absolute top-20 left-10 text-accent/40"
+        className={`absolute top-20 left-10 ${isCyberpunk ? 'text-accent/60 drop-shadow-[0_0_15px_var(--accent)]' : 'text-accent/40'}`}
         animate={{ 
           rotate: 360,
           scale: [1, 1.3, 1],
@@ -185,7 +189,7 @@ export function Hero() {
       </motion.div>
       
       <motion.div 
-        className="absolute top-40 right-16 text-primary/30"
+        className={`absolute top-40 right-16 ${isCyberpunk ? 'text-primary/50 drop-shadow-[0_0_15px_var(--primary)]' : 'text-primary/30'}`}
         animate={{ 
           rotate: [0, 10, -10, 0],
           y: [0, -15, 0],
@@ -200,7 +204,7 @@ export function Hero() {
       </motion.div>
 
       <motion.div 
-        className="absolute bottom-32 right-20 text-accent/25"
+        className={`absolute bottom-32 right-20 ${isCyberpunk ? 'text-accent/40 drop-shadow-[0_0_15px_var(--accent)]' : 'text-accent/25'}`}
         animate={{ 
           rotate: -360,
           x: [0, 20, 0],
@@ -214,7 +218,7 @@ export function Hero() {
       </motion.div>
 
       <motion.div 
-        className="absolute bottom-48 left-16 text-primary/20"
+        className={`absolute bottom-48 left-16 ${isCyberpunk ? 'text-primary/35 drop-shadow-[0_0_15px_var(--primary)]' : 'text-primary/20'}`}
         animate={{ 
           scale: [1, 1.2, 1],
           rotate: [0, 180, 360],
@@ -239,7 +243,7 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <motion.div 
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6 backdrop-blur-sm"
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border backdrop-blur-sm ${isCyberpunk ? 'border-primary/40 shadow-[0_0_20px_var(--primary)]' : 'border-primary/20'}`}
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
@@ -259,7 +263,7 @@ export function Hero() {
           >
             Transformando Ideias em{' '}
             <motion.span 
-              className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent bg-[length:200%_auto]"
+              className={`bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent bg-[length:200%_auto] ${isCyberpunk ? 'drop-shadow-[0_0_30px_var(--primary)]' : ''}`}
               animate={{ backgroundPosition: ['0%', '100%', '0%'] }}
               transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
             >
@@ -290,7 +294,7 @@ export function Hero() {
               <Button
                 size="lg"
                 onClick={scrollToContact}
-                className="text-lg px-8 py-6 rounded-full bg-gradient-to-r from-primary to-accent hover:shadow-2xl hover:shadow-primary/50 transition-all relative overflow-hidden group"
+                className={`text-lg px-8 py-6 rounded-full bg-gradient-to-r from-primary to-accent hover:shadow-2xl transition-all relative overflow-hidden group ${isCyberpunk ? 'shadow-[0_0_30px_var(--primary)] hover:shadow-[0_0_50px_var(--primary)]' : 'hover:shadow-primary/50'}`}
               >
                 <motion.span
                   className="absolute inset-0 bg-gradient-to-r from-accent to-primary"
@@ -313,7 +317,7 @@ export function Hero() {
                   const element = document.getElementById('services')
                   if (element) element.scrollIntoView({ behavior: 'smooth' })
                 }}
-                className="text-lg px-8 py-6 rounded-full border-2 hover:bg-accent/10 relative overflow-hidden group"
+                className={`text-lg px-8 py-6 rounded-full border-2 hover:bg-accent/10 relative overflow-hidden group ${isCyberpunk ? 'border-primary/60 shadow-[0_0_15px_var(--primary)]' : ''}`}
               >
                 Conheça Nossos Serviços
               </Button>
@@ -331,7 +335,7 @@ export function Hero() {
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             >
               <ArrowDown
-                className="mx-auto text-muted-foreground"
+                className={`mx-auto ${isCyberpunk ? 'text-primary drop-shadow-[0_0_10px_var(--primary)]' : 'text-muted-foreground'}`}
                 size={32}
                 weight="bold"
               />

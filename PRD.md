@@ -46,12 +46,12 @@ A modern, futuristic landing page for PortalSync - a technology consultancy spec
 - **Progression**: User focuses field → Label animates → User fills form → Validation on blur → Submit → Loading state → Success/error toast
 - **Success criteria**: All fields validate correctly, form submits successfully (stored in KV), clear success feedback, accessible
 
-### Theme Toggle (Light/Dark Mode)
-- **Functionality**: Switch between light and dark color schemes
-- **Purpose**: User preference and modern UX expectation
+### Theme Toggle (Light/Dark/Cyberpunk Mode)
+- **Functionality**: Cycle between light, dark, and cyberpunk neon color schemes
+- **Purpose**: User preference and modern UX expectation with additional cyberpunk aesthetic option
 - **Trigger**: Click theme toggle button in header
-- **Progression**: Click toggle → Theme preference saved → Smooth color transition → All components update
-- **Success criteria**: Theme persists across sessions, smooth transitions, both themes are equally polished
+- **Progression**: Click toggle → Theme cycles (Light → Dark → Cyberpunk → Light) → Theme preference saved → Smooth color transition → All components update with theme-specific effects
+- **Success criteria**: Theme persists across sessions, smooth transitions, all three themes are equally polished, cyberpunk theme includes neon glow effects
 
 ### Scroll Animations & Progress
 - **Functionality**: Elements animate as they enter viewport, optional scroll progress indicator
@@ -77,16 +77,30 @@ The design should evoke feelings of technological sophistication, professional r
 
 ## Color Selection
 
-A vibrant tech-forward palette inspired by PortalSync's brand identity, combining deep purples with electric cyan accents that convey innovation and digital transformation.
+A vibrant tech-forward palette inspired by PortalSync's brand identity, combining deep purples with electric cyan accents that convey innovation and digital transformation. Three distinct themes are available:
 
-- **Primary Color**: Electric Purple `oklch(55% 0.25 285)` - Represents innovation, technology, and creativity; used for primary CTAs and key interactive elements
+**Light Mode**: Clean and professional with subtle purple accents
+- **Primary Color**: Electric Purple `oklch(55% 0.25 285)` - Represents innovation, technology, and creativity
 - **Secondary Colors**: 
-  - Deep Slate `oklch(92% 0.01 264)` - Light backgrounds and cards in light mode
-  - Dark Purple `oklch(18% 0.04 264)` - Card backgrounds for dark mode, creating depth and sophistication
-- **Accent Color**: Bright Cyan `oklch(70% 0.15 195)` - Attention-grabbing highlight for hover states, important badges, and interactive elements
+  - Deep Slate `oklch(92% 0.01 264)` - Light backgrounds and cards
+- **Accent Color**: Bright Cyan `oklch(70% 0.15 195)` - Attention-grabbing highlight
+
+**Dark Mode**: Sophisticated and modern with vibrant accents
+- **Primary Color**: Brighter Purple `oklch(60% 0.25 285)` - Enhanced visibility on dark backgrounds
+- **Background**: Deep Purple `oklch(15% 0.03 264)` - Creating depth and sophistication
+- **Accent Color**: Lighter Cyan `oklch(75% 0.15 195)` - Stands out on dark backgrounds
+
+**Cyberpunk Mode**: Neon-infused futuristic aesthetic with intense glows
+- **Primary Color**: Hot Magenta `oklch(70% 0.30 330)` - Vivid neon pink for maximum impact
+- **Secondary Color**: Electric Cyan `oklch(65% 0.28 195)` - Complementary neon blue
+- **Accent Color**: Neon Green `oklch(75% 0.25 150)` - Striking highlight color
+- **Background**: Deep Dark Blue `oklch(12% 0.08 280)` - Nearly black with blue undertone
+- **Special Effects**: All interactive elements include neon glow shadows, text-shadow on headings, and enhanced border glows
+
 - **Foreground/Background Pairings**:
   - Light mode background (Soft Slate `oklch(98% 0.01 264)`): Dark text `oklch(20% 0.02 264)` - Ratio 15.8:1 ✓
   - Dark mode background (Deep Purple `oklch(15% 0.03 264)`): Light text `oklch(97% 0.01 264)` - Ratio 17.2:1 ✓
+  - Cyberpunk background (Deep Dark Blue `oklch(12% 0.08 280)`): Neon Pink text `oklch(95% 0.15 330)` - Ratio 14.5:1 ✓
   - Primary buttons (Electric Purple `oklch(55% 0.25 285)`): White text `oklch(100% 0 0)` - Ratio 7.1:1 ✓
   - Accent (Bright Cyan `oklch(70% 0.15 195)`): Dark text `oklch(20% 0.02 264)` - Ratio 8.9:1 ✓
 
@@ -115,19 +129,22 @@ Animations should create a sense of fluid, responsive interaction that feels bot
 - Smooth color transitions for theme switching (200ms)
 - Magnetic hover effects on CTAs with scale (1.02) and shadow
 - Background gradient animations (subtle, slow-moving for depth)
+- Matrix-style binary rain animation in hero background
+- Floating code symbols animated across the hero section
 - Form field focus with subtle glow and label float
 - Success states with checkmark animation and confetti micro-interaction
+- **Cyberpunk Mode**: Enhanced neon glow effects on all interactive elements, pulsing shadows, and intensified particle animations
 
 ## Component Selection
 
 ### Components
-- **Navigation**: Custom sticky header with logo, menu links, and theme toggle - transparent on hero, solid background on scroll
-- **Hero**: Custom full-height section with gradient background, animated text using framer-motion
-- **Service Cards**: shadcn Card components with hover effects, icons from Phosphor, custom hover states
+- **Navigation**: Custom sticky header with logo, menu links, and theme cycler (Light/Dark/Cyberpunk) - transparent on hero, solid background on scroll
+- **Hero**: Custom full-height section with gradient background, matrix-style animation canvas, animated text using framer-motion, floating code symbols
+- **Service Cards**: shadcn Card components with hover effects, icons from Phosphor, custom hover states with theme-aware glows
 - **Tech Stack**: Custom grid layout with Badge components for tech logos/names
 - **About Section**: Card with custom layout, potential use of Separator for visual breaks
 - **Contact Form**: shadcn Form with Input, Textarea, Select (for service interest), Button - full validation with react-hook-form and zod
-- **Theme Toggle**: Custom button with sun/moon icons from Phosphor, positioned in header
+- **Theme Cycler**: Custom button with sun/moon/lightning icons from Phosphor, positioned in header, cycles through three themes
 - **Toast Notifications**: sonner for form submission feedback
 - **Footer**: Custom component with company info, links, social icons
 
@@ -137,12 +154,15 @@ Animations should create a sense of fluid, responsive interaction that feels bot
 - **Animated Section Wrapper**: Custom component using Intersection Observer and framer-motion for scroll-triggered animations
 - **Magnetic Buttons**: Custom hover effect using framer-motion for CTAs
 - **Glass Morphism Cards**: Custom styling with backdrop-filter and semi-transparent backgrounds
+- **Matrix Rain Animation**: Canvas-based binary code rain effect in hero background
+- **Cyberpunk Neon Effects**: CSS-based glow effects (box-shadow, text-shadow, drop-shadow) activated in cyberpunk theme
+- **Theme-Aware Components**: Dynamic styling based on active theme with enhanced effects for cyberpunk mode
 
 ### States
-- **Buttons**: Default (gradient background), Hover (scale + enhanced shadow + brightness), Active (scale down 0.98), Focus (ring), Disabled (opacity 0.5 + no interaction)
-- **Form Inputs**: Default (border subtle), Focus (border accent + glow), Error (border red + error message), Success (border green + checkmark), Disabled (opacity 0.6)
-- **Cards**: Default (subtle shadow), Hover (lifted shadow + subtle scale 1.02 + border glow)
-- **Theme Toggle**: Light icon visible in light mode, dark icon in dark mode, smooth rotation on toggle
+- **Buttons**: Default (gradient background), Hover (scale + enhanced shadow + brightness), Active (scale down 0.98), Focus (ring), Disabled (opacity 0.5 + no interaction), Cyberpunk (neon glow shadows)
+- **Form Inputs**: Default (border subtle), Focus (border accent + glow), Error (border red + error message), Success (border green + checkmark), Disabled (opacity 0.6), Cyberpunk (glowing borders)
+- **Cards**: Default (subtle shadow), Hover (lifted shadow + subtle scale 1.02 + border glow), Cyberpunk (neon border glow)
+- **Theme Cycler**: Sun icon (light mode), Moon icon (dark mode), Lightning icon (cyberpunk mode), smooth icon transitions with rotation animation
 
 ### Icon Selection
 - **Navigation**: List/X (hamburger menu), MoonStars/Sun (theme toggle)

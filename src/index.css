@@ -15,6 +15,24 @@
   .font-mono {
     font-family: 'JetBrains Mono', monospace;
   }
+
+  .cyberpunk .bg-primary {
+    box-shadow: 0 0 20px var(--primary), 0 0 40px var(--primary);
+  }
+
+  .cyberpunk button:hover,
+  .cyberpunk a:hover {
+    text-shadow: 0 0 8px var(--primary);
+  }
+
+  .cyberpunk [class*="border-primary"] {
+    box-shadow: 0 0 10px var(--primary);
+  }
+
+  .cyberpunk h1,
+  .cyberpunk h2 {
+    text-shadow: 0 0 20px var(--primary);
+  }
 }
 
 :root {
@@ -77,6 +95,38 @@
   --border: oklch(28% 0.03 264);
   --input: oklch(28% 0.03 264);
   --ring: oklch(75% 0.15 195);
+}
+
+.cyberpunk {
+  --background: oklch(12% 0.08 280);
+  --foreground: oklch(95% 0.15 330);
+  
+  --card: oklch(16% 0.08 280);
+  --card-foreground: oklch(95% 0.15 330);
+  
+  --popover: oklch(14% 0.08 280);
+  --popover-foreground: oklch(95% 0.15 330);
+  
+  --primary: oklch(70% 0.30 330);
+  --primary-foreground: oklch(10% 0.05 280);
+  
+  --secondary: oklch(65% 0.28 195);
+  --secondary-foreground: oklch(10% 0.05 280);
+  
+  --muted: oklch(20% 0.06 280);
+  --muted-foreground: oklch(60% 0.12 330);
+  
+  --accent: oklch(75% 0.25 150);
+  --accent-foreground: oklch(10% 0.05 280);
+  
+  --destructive: oklch(68% 0.28 25);
+  --destructive-foreground: oklch(10% 0.05 280);
+  
+  --border: oklch(35% 0.15 330);
+  --input: oklch(35% 0.15 330);
+  --ring: oklch(70% 0.30 330);
+  
+  --radius: 0.5rem;
 }
 
 @theme {
