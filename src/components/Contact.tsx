@@ -73,13 +73,13 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="py-24 lg:py-32 relative overflow-hidden bg-background">
+    <section id="contact" className="py-16 lg:py-20 relative overflow-hidden bg-background">
       <WorldMap />
       
       <div className="absolute inset-0 bg-gradient-to-br from-background/70 via-background/80 to-background/70 pointer-events-none" style={{ zIndex: 1 }} />
       
       <div className="container mx-auto px-6 lg:px-12 relative" style={{ zIndex: 2 }}>
-        <AnimatedSection className="text-center mb-16">
+        <AnimatedSection className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-4 backdrop-blur-sm">
             <Envelope className="text-accent" weight="duotone" size={16} />
             <span className="text-xs font-mono uppercase tracking-wider text-accent">
