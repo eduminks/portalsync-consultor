@@ -10,16 +10,16 @@ interface Connection {
 }
 
 const cities = [
-  { x: 18, y: 38, name: 'New York' },
-  { x: 12, y: 30, name: 'Vancouver' },
+  { x: 18, y: 25, name: 'New York' },
+  { x: 12, y: 18, name: 'Vancouver' },
   { x: 26, y: 60, name: 'São Paulo' },
-  { x: 48, y: 30, name: 'London' },
-  { x: 50, y: 32, name: 'Paris' },
-  { x: 55, y: 40, name: 'Cairo' },
-  { x: 62, y: 38, name: 'Dubai' },
-  { x: 70, y: 42, name: 'Mumbai' },
-  { x: 78, y: 36, name: 'Singapore' },
-  { x: 85, y: 34, name: 'Tokyo' },
+  { x: 48, y: 22, name: 'London' },
+  { x: 50, y: 24, name: 'Paris' },
+  { x: 55, y: 32, name: 'Cairo' },
+  { x: 62, y: 28, name: 'Dubai' },
+  { x: 70, y: 30, name: 'Mumbai' },
+  { x: 78, y: 26, name: 'Singapore' },
+  { x: 85, y: 22, name: 'Tokyo' },
   { x: 88, y: 64, name: 'Sydney' },
   { x: 56, y: 56, name: 'Cape Town' },
 ]
