@@ -9,13 +9,13 @@ const services = [
     icon: Code,
     title: 'Desenvolvimento de Software',
     description:
-      'Criamos aplicações web modernas e escaláveis, utilizando as melhores tecnologias do mercado para transformar sua visão em realidade digital.',
+      'Criamos aplicações web e desktop modernas e escaláveis, utilizando as melhores e mais atuais tecnologias do mercado para transformar sua visão em realidade digital.',
   },
   {
     icon: Database,
-    title: 'Consultoria em ERPs',
+    title: 'Consultoria Senior Sistemas',
     description:
-      'Especialistas em sistemas de gestão empresarial, oferecemos consultoria completa para implementação, customização e otimização de ERPs.',
+      'Especialistas em sistemas de gestão empresarial, oferecemos consultoria completa para implementação, customização e otimização de soluções Senior ERP e HCM.',
   },
   {
     icon: GitBranch,
@@ -27,7 +27,7 @@ const services = [
     icon: ChartBar,
     title: 'Automação Comercial',
     description:
-      'Soluções completas para gestão comercial, desde PDV até controle de estoque, otimizando suas operações e aumentando produtividade.',
+      'Possuimos uma plataforma completa para Gestão de Relacionamento com Clientes (CRM), Força de Vendas, Gestão de Equipes e Marketing.',
   },
 ]
 
@@ -35,8 +35,9 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
   const [isHovered, setIsHovered] = useState(false)
   
   return (
-    <AnimatedSection delay={index * 0.1}>
+    <AnimatedSection delay={index * 0.1} className="h-full">
       <motion.div
+        className="h-full"
         onHoverStart={() => setIsHovered(true)}
         onHoverEnd={() => setIsHovered(false)}
         whileHover={{ y: -8 }}

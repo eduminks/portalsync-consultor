@@ -11,6 +11,7 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false)
   const { theme, toggleTheme } = useTheme()
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState<string>('hero')
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,6 +19,26 @@ export function Header() {
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    const sectionIds = ['hero', 'services', 'tech', 'about', 'contact']
+    const observers: IntersectionObserver[] = []
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id)
+      if (!el) return
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) setActiveSection(id)
+        },
+        { rootMargin: '-40% 0px -55% 0px', threshold: 0 }
+      )
+      observer.observe(el)
+      observers.push(observer)
+    })
+
+    return () => observers.forEach((o) => o.disconnect())
   }, [])
 
   const scrollToSection = (id: string) => {
@@ -80,10 +101,18 @@ export function Header() {
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ scale: 1.05 }}
               >
-                <span className="relative z-10 font-mono text-sm tracking-wide text-foreground/70 group-hover:text-foreground transition-colors">
+                <span className={`relative z-10 font-mono text-sm tracking-wide transition-colors ${
+                  activeSection === link.id
+                    ? 'text-foreground'
+                    : 'text-foreground/70 group-hover:text-foreground'
+                }`}>
                   {link.label}
                 </span>
-                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary to-accent scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
+                <div className={`absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary to-accent transition-transform origin-left ${
+                  activeSection === link.id
+                    ? 'scale-x-100'
+                    : 'scale-x-0 group-hover:scale-x-100'
+                }`} />
               </motion.button>
             ))}
           </nav>
@@ -159,13 +188,17 @@ export function Header() {
                     <motion.button
                       key={link.id}
                       onClick={() => scrollToSection(link.id)}
-                      className="text-left text-lg font-medium hover:text-primary transition-colors font-mono relative group px-4 py-2 rounded-lg"
+                      className={`text-left text-lg font-medium transition-colors font-mono relative group px-4 py-2 rounded-lg ${
+                        activeSection === link.id ? 'text-primary' : 'hover:text-primary'
+                      }`}
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.1 }}
                     >
                       <span className="relative z-10">{link.label}</span>
-                      <div className="absolute inset-0 bg-primary/10 scale-x-0 group-hover:scale-x-100 transition-transform origin-left rounded-lg" />
+                      <div className={`absolute inset-0 bg-primary/10 transition-transform origin-left rounded-lg ${
+                        activeSection === link.id ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                      }`} />
                     </motion.button>
                   ))}
                 </div>

@@ -1,19 +1,27 @@
 import { GithubLogo, LinkedinLogo, EnvelopeSimple } from '@phosphor-icons/react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useEffect } from 'react'
-import { useTheme } from '@/hooks/use-theme'
 import logoWhite from '@/assets/images/portalsync_branco_transp.png'
 import logoBlack from '@/assets/images/logo_preto-removebg-preview.png'
+
+function useIsDark() {
+  const [isDark, setIsDark] = useState(() =>
+    document.documentElement.classList.contains('dark')
+  )
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setIsDark(document.documentElement.classList.contains('dark'))
+    })
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+    return () => observer.disconnect()
+  }, [])
+  return isDark
+}
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
   const [hoveredLink, setHoveredLink] = useState<string | null>(null)
-  const { theme } = useTheme()
-  const [currentLogo, setCurrentLogo] = useState<string>(logoBlack)
-
-  useEffect(() => {
-    setCurrentLogo(theme === 'dark' ? logoWhite : logoBlack)
-  }, [theme])
+  const isDark = useIsDark()
 
   const socialLinks = [
     { icon: GithubLogo, href: 'https://github.com', label: 'GitHub' },
@@ -45,15 +53,16 @@ export function Footer() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
+            className="flex items-center"
           >
             <motion.div 
-              className="mb-4 relative h-32"
+              className="relative h-32"
               whileHover={{ scale: 1.05 }}
             >
               <AnimatePresence mode="wait">
                 <motion.img
-                  key={currentLogo}
-                  src={currentLogo}
+                  key={isDark ? 'dark' : 'light'}
+                  src={isDark ? logoWhite : logoBlack}
                   alt="PortalSync"
                   className="h-32 w-auto object-contain"
                   initial={{ opacity: 0, scale: 0.9, filter: 'blur(4px)' }}
@@ -63,9 +72,6 @@ export function Footer() {
                 />
               </AnimatePresence>
             </motion.div>
-            <p className="text-muted-foreground">
-              Transformando ideias em soluções digitais de alto impacto.
-            </p>
           </motion.div>
 
           <motion.div

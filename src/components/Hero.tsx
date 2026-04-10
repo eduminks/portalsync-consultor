@@ -1,36 +1,11 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowDown, Rocket, Code, Cpu, Lightning, CloudArrowUp } from '@phosphor-icons/react'
+import { ArrowDown } from '@phosphor-icons/react'
 import { Button } from '@/components/ui/button'
-import { useEffect, useState } from 'react'
-
-interface FloatingIcon {
-  id: number
-  Icon: typeof Code
-  x: number
-  y: number
-  delay: number
-  duration: number
-}
 
 export function Hero() {
   const { scrollY } = useScroll()
   const y = useTransform(scrollY, [0, 500], [0, 150])
   const opacity = useTransform(scrollY, [0, 300], [1, 0])
-  
-  const [floatingIcons, setFloatingIcons] = useState<FloatingIcon[]>([])
-
-  useEffect(() => {
-    const icons = [Code, Cpu, Lightning, CloudArrowUp, Rocket]
-    const floating = Array.from({ length: 8 }, (_, i) => ({
-      id: i,
-      Icon: icons[i % icons.length],
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      delay: Math.random() * 2,
-      duration: Math.random() * 5 + 8,
-    }))
-    setFloatingIcons(floating)
-  }, [])
 
   const scrollToContact = () => {
     const element = document.getElementById('contact')
@@ -60,55 +35,13 @@ export function Hero() {
       
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(var(--primary)/0.15)_0%,transparent_50%)]" />
       
-      {floatingIcons.map((item) => {
-        const IconComponent = item.Icon
-        return (
-          <motion.div
-            key={item.id}
-            className="absolute text-primary/20"
-            style={{
-              left: `${item.x}%`,
-              top: `${item.y}%`,
-            }}
-            animate={{
-              y: [0, -30, 0],
-              x: [0, 15, 0],
-              rotate: [0, 10, -10, 0],
-              opacity: [0.1, 0.3, 0.1],
-            }}
-            transition={{
-              duration: item.duration,
-              delay: item.delay,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          >
-            <IconComponent size={64} weight="duotone" />
-          </motion.div>
-        )
-      })}
 
       <motion.div 
         className="container mx-auto px-6 lg:px-12 relative z-10"
         style={{ y, opacity }}
       >
         <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <motion.div 
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm mb-6"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <Rocket className="text-primary" weight="duotone" />
-              <span className="text-sm font-mono uppercase tracking-wider text-primary">
-                Tecnologia & Inovação
-              </span>
-            </motion.div>
-          </motion.div>
+
 
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
