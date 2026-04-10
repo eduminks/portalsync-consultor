@@ -47,7 +47,7 @@ export function Hero() {
       <div className="absolute inset-0 w-full h-full overflow-hidden">
         <iframe
           className="absolute top-1/2 left-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.77vh] -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-          src="https://www.youtube.com/embed/hrs0_uY6pzk?autoplay=1&mute=1&loop=1&playlist=hrs0_uY6pzk&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1"
+          src="https://www.youtube.com/embed/JqUC1wdy_2c?autoplay=1&mute=1&loop=1&playlist=JqUC1wdy_2c&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1"
           title="Background video"
           allow="autoplay; encrypted-media"
           allowFullScreen
