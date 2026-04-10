@@ -1,22 +1,13 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowDown, Rocket, Code, Terminal, BracketsCurly, GitBranch } from '@phosphor-icons/react'
+import { ArrowDown, Rocket, Code, Cpu, Lightning, CloudArrowUp } from '@phosphor-icons/react'
 import { Button } from '@/components/ui/button'
-import { useEffect, useState, useRef } from 'react'
-import { useTheme } from '@/hooks/use-theme'
+import { useEffect, useState } from 'react'
 
-interface MatrixColumn {
+interface FloatingIcon {
   id: number
-  x: number
-  speed: number
-  characters: string
-  delay: number
-}
-
-interface BinaryParticle {
-  id: number
+  Icon: typeof Code
   x: number
   y: number
-  value: string
   delay: number
   duration: number
 }
@@ -25,81 +16,20 @@ export function Hero() {
   const { scrollY } = useScroll()
   const y = useTransform(scrollY, [0, 500], [0, 150])
   const opacity = useTransform(scrollY, [0, 300], [1, 0])
-  const { theme } = useTheme()
   
-  const [matrixColumns, setMatrixColumns] = useState<MatrixColumn[]>([])
-  const [binaryParticles, setBinaryParticles] = useState<BinaryParticle[]>([])
-  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [floatingIcons, setFloatingIcons] = useState<FloatingIcon[]>([])
 
   useEffect(() => {
-    const columns = Array.from({ length: 25 }, (_, i) => ({
+    const icons = [Code, Cpu, Lightning, CloudArrowUp, Rocket]
+    const floating = Array.from({ length: 8 }, (_, i) => ({
       id: i,
-      x: (i / 25) * 100,
-      speed: Math.random() * 3 + 2,
-      characters: '{ } [ ] < > / \\ ; : = + - * # @ $ % & |',
-      delay: Math.random() * 2,
-    }))
-    setMatrixColumns(columns)
-
-    const particles = Array.from({ length: 40 }, (_, i) => ({
-      id: i,
+      Icon: icons[i % icons.length],
       x: Math.random() * 100,
       y: Math.random() * 100,
-      value: Math.random() > 0.5 ? '0' : '1',
-      delay: Math.random() * 5,
-      duration: Math.random() * 10 + 10,
+      delay: Math.random() * 2,
+      duration: Math.random() * 5 + 8,
     }))
-    setBinaryParticles(particles)
-  }, [])
-
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    const resizeCanvas = () => {
-      canvas.width = canvas.offsetWidth
-      canvas.height = canvas.offsetHeight
-    }
-    resizeCanvas()
-    window.addEventListener('resize', resizeCanvas)
-
-    const chars = '01'
-    const fontSize = 14
-    const columns = Math.floor(canvas.width / fontSize)
-    const drops: number[] = Array(columns).fill(0)
-
-    const draw = () => {
-      ctx.fillStyle = 'rgba(var(--background), 0.05)'
-      ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-      ctx.fillStyle = 'var(--primary)'
-      ctx.font = `${fontSize}px JetBrains Mono, monospace`
-
-      for (let i = 0; i < drops.length; i++) {
-        const text = chars[Math.floor(Math.random() * chars.length)]
-        const x = i * fontSize
-        const y = drops[i] * fontSize
-
-        ctx.fillStyle = i % 3 === 0 ? 'var(--accent)' : 'var(--primary)'
-        ctx.globalAlpha = Math.random() * 0.5 + 0.3
-        ctx.fillText(text, x, y)
-
-        if (y > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0
-        }
-        drops[i]++
-      }
-    }
-
-    const interval = setInterval(draw, 50)
-
-    return () => {
-      clearInterval(interval)
-      window.removeEventListener('resize', resizeCanvas)
-    }
+    setFloatingIcons(floating)
   }, [])
 
   const scrollToContact = () => {
@@ -109,128 +39,53 @@ export function Hero() {
     }
   }
 
-  const isCyberpunk = theme === 'cyberpunk'
-
   return (
     <section
       id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      <div className={`absolute inset-0 ${isCyberpunk ? 'bg-gradient-to-br from-primary/10 via-background to-accent/10' : 'bg-gradient-to-br from-primary/5 via-background to-accent/5'}`} />
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5" />
       
-      <canvas
-        ref={canvasRef}
-        className={`absolute inset-0 w-full h-full ${isCyberpunk ? 'opacity-50' : 'opacity-30'}`}
+      <div 
+        className="absolute inset-0 opacity-30"
+        style={{
+          backgroundImage: `
+            repeating-linear-gradient(0deg, transparent, transparent 2px, hsl(var(--border)) 2px, hsl(var(--border)) 3px),
+            repeating-linear-gradient(90deg, transparent, transparent 2px, hsl(var(--border)) 2px, hsl(var(--border)) 3px)
+          `,
+          backgroundSize: '80px 80px',
+        }}
       />
-
-      <div className={`absolute inset-0 ${isCyberpunk ? 'bg-[radial-gradient(circle_at_50%_50%,var(--primary)_0%,transparent_50%)] opacity-40' : 'bg-[radial-gradient(circle_at_50%_50%,var(--primary)_0%,transparent_50%)] opacity-20'} blur-3xl`} />
       
-      {matrixColumns.map((column) => (
-        <motion.div
-          key={column.id}
-          className={`absolute top-0 font-mono text-xs whitespace-pre ${isCyberpunk ? 'text-primary/60' : 'text-primary/40'}`}
-          style={{
-            left: `${column.x}%`,
-          }}
-          initial={{ y: -100 }}
-          animate={{ y: '100vh' }}
-          transition={{
-            duration: column.speed,
-            delay: column.delay,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        >
-          {column.characters.split('').map((char, i) => (
-            <div key={i} className="leading-tight">
-              {char}
-            </div>
-          ))}
-        </motion.div>
-      ))}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(var(--primary)/0.15)_0%,transparent_50%)]" />
       
-      {binaryParticles.map((particle) => (
-        <motion.div
-          key={particle.id}
-          className={`absolute font-mono text-xl font-bold ${isCyberpunk ? 'drop-shadow-[0_0_10px_var(--primary)]' : ''}`}
-          style={{
-            left: `${particle.x}%`,
-            top: `${particle.y}%`,
-          }}
-          animate={{
-            y: [0, -50, 0],
-            opacity: [0.1, 0.8, 0.1],
-            scale: [0.8, 1.2, 0.8],
-            color: ['var(--primary)', 'var(--accent)', 'var(--primary)'],
-          }}
-          transition={{
-            duration: particle.duration,
-            delay: particle.delay,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        >
-          {particle.value}
-        </motion.div>
-      ))}
-      
-      <motion.div 
-        className={`absolute top-20 left-10 ${isCyberpunk ? 'text-accent/60 drop-shadow-[0_0_15px_var(--accent)]' : 'text-accent/40'}`}
-        animate={{ 
-          rotate: 360,
-          scale: [1, 1.3, 1],
-        }}
-        transition={{ 
-          rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-          scale: { duration: 3, repeat: Infinity, ease: "easeInOut" },
-        }}
-      >
-        <Code size={48} weight="duotone" />
-      </motion.div>
-      
-      <motion.div 
-        className={`absolute top-40 right-16 ${isCyberpunk ? 'text-primary/50 drop-shadow-[0_0_15px_var(--primary)]' : 'text-primary/30'}`}
-        animate={{ 
-          rotate: [0, 10, -10, 0],
-          y: [0, -15, 0],
-        }}
-        transition={{ 
-          duration: 5,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      >
-        <Terminal size={56} weight="duotone" />
-      </motion.div>
-
-      <motion.div 
-        className={`absolute bottom-32 right-20 ${isCyberpunk ? 'text-accent/40 drop-shadow-[0_0_15px_var(--accent)]' : 'text-accent/25'}`}
-        animate={{ 
-          rotate: -360,
-          x: [0, 20, 0],
-        }}
-        transition={{ 
-          rotate: { duration: 15, repeat: Infinity, ease: "linear" },
-          x: { duration: 4, repeat: Infinity, ease: "easeInOut" },
-        }}
-      >
-        <BracketsCurly size={64} weight="duotone" />
-      </motion.div>
-
-      <motion.div 
-        className={`absolute bottom-48 left-16 ${isCyberpunk ? 'text-primary/35 drop-shadow-[0_0_15px_var(--primary)]' : 'text-primary/20'}`}
-        animate={{ 
-          scale: [1, 1.2, 1],
-          rotate: [0, 180, 360],
-        }}
-        transition={{ 
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      >
-        <GitBranch size={52} weight="duotone" />
-      </motion.div>
+      {floatingIcons.map((item) => {
+        const IconComponent = item.Icon
+        return (
+          <motion.div
+            key={item.id}
+            className="absolute text-primary/20"
+            style={{
+              left: `${item.x}%`,
+              top: `${item.y}%`,
+            }}
+            animate={{
+              y: [0, -30, 0],
+              x: [0, 15, 0],
+              rotate: [0, 10, -10, 0],
+              opacity: [0.1, 0.3, 0.1],
+            }}
+            transition={{
+              duration: item.duration,
+              delay: item.delay,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            <IconComponent size={64} weight="duotone" />
+          </motion.div>
+        )
+      })}
 
       <motion.div 
         className="container mx-auto px-6 lg:px-12 relative z-10"
@@ -243,7 +98,7 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <motion.div 
-              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border backdrop-blur-sm ${isCyberpunk ? 'border-primary/40 shadow-[0_0_20px_var(--primary)]' : 'border-primary/20'}`}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm mb-6"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
@@ -263,7 +118,7 @@ export function Hero() {
           >
             Transformando Ideias em{' '}
             <motion.span 
-              className={`bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent bg-[length:200%_auto] ${isCyberpunk ? 'drop-shadow-[0_0_30px_var(--primary)]' : ''}`}
+              className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent bg-[length:200%_auto]"
               animate={{ backgroundPosition: ['0%', '100%', '0%'] }}
               transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
             >
@@ -275,7 +130,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-xl md:text-2xl text-muted-foreground mb-12 leading-relaxed"
+            className="text-xl md:text-2xl text-muted-foreground mb-12 leading-relaxed max-w-3xl mx-auto"
           >
             Especialistas em desenvolvimento de software, integrações de sistemas,
             ERPs e automação comercial. Levamos sua empresa para o próximo nível.
@@ -294,16 +149,9 @@ export function Hero() {
               <Button
                 size="lg"
                 onClick={scrollToContact}
-                className={`text-lg px-8 py-6 rounded-full bg-gradient-to-r from-primary to-accent hover:shadow-2xl transition-all relative overflow-hidden group ${isCyberpunk ? 'shadow-[0_0_30px_var(--primary)] hover:shadow-[0_0_50px_var(--primary)]' : 'hover:shadow-primary/50'}`}
+                className="text-lg px-8 py-6 rounded-full bg-gradient-to-r from-primary to-accent hover:shadow-xl hover:shadow-primary/50 transition-all"
               >
-                <motion.span
-                  className="absolute inset-0 bg-gradient-to-r from-accent to-primary"
-                  initial={{ x: '-100%' }}
-                  whileHover={{ x: '100%' }}
-                  transition={{ duration: 0.5 }}
-                  style={{ opacity: 0.3 }}
-                />
-                <span className="relative">Fale Conosco</span>
+                Fale Conosco
               </Button>
             </motion.div>
             <motion.div
@@ -317,7 +165,7 @@ export function Hero() {
                   const element = document.getElementById('services')
                   if (element) element.scrollIntoView({ behavior: 'smooth' })
                 }}
-                className={`text-lg px-8 py-6 rounded-full border-2 hover:bg-accent/10 relative overflow-hidden group ${isCyberpunk ? 'border-primary/60 shadow-[0_0_15px_var(--primary)]' : ''}`}
+                className="text-lg px-8 py-6 rounded-full border-2 hover:bg-primary/10 hover:border-primary transition-all"
               >
                 Conheça Nossos Serviços
               </Button>
@@ -335,7 +183,7 @@ export function Hero() {
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             >
               <ArrowDown
-                className={`mx-auto ${isCyberpunk ? 'text-primary drop-shadow-[0_0_10px_var(--primary)]' : 'text-muted-foreground'}`}
+                className="mx-auto text-muted-foreground"
                 size={32}
                 weight="bold"
               />

@@ -46,12 +46,12 @@ A modern, futuristic landing page for PortalSync - a technology consultancy spec
 - **Progression**: User focuses field → Label animates → User fills form → Validation on blur → Submit → Loading state → Success/error toast
 - **Success criteria**: All fields validate correctly, form submits successfully (stored in KV), clear success feedback, accessible
 
-### Theme Toggle (Light/Dark/Cyberpunk Mode)
-- **Functionality**: Cycle between light, dark, and cyberpunk neon color schemes
-- **Purpose**: User preference and modern UX expectation with additional cyberpunk aesthetic option
+### Theme Toggle (Light/Dark Mode)
+- **Functionality**: Toggle between light and dark color schemes
+- **Purpose**: User preference and accessibility
 - **Trigger**: Click theme toggle button in header
-- **Progression**: Click toggle → Theme cycles (Light → Dark → Cyberpunk → Light) → Theme preference saved → Smooth color transition → All components update with theme-specific effects
-- **Success criteria**: Theme persists across sessions, smooth transitions, all three themes are equally polished, cyberpunk theme includes neon glow effects
+- **Progression**: Click toggle → Theme switches (Light ↔ Dark) → Theme preference saved → Smooth color transition → All components update
+- **Success criteria**: Theme persists across sessions, smooth transitions, both themes are equally polished
 
 ### Scroll Animations & Progress
 - **Functionality**: Elements animate as they enter viewport, optional scroll progress indicator
@@ -77,33 +77,25 @@ The design should evoke feelings of technological sophistication, professional r
 
 ## Color Selection
 
-Uma paleta moderna e vibrante que equilibra profissionalismo com inovação tecnológica. Três temas distintos oferecem experiências visuais únicas:
+Uma paleta sofisticada e moderna que equilibra profissionalismo corporativo com inovação tecnológica. Design limpo com toques de azul e verde para transmitir confiança e crescimento:
 
-**Light Mode**: Leve, limpo e profissional com toques vibrantes de roxo e turquesa
-- **Primary Color**: Violeta Vibrante `oklch(58% 0.24 265)` - Energia, tecnologia e criatividade
-- **Accent Color**: Turquesa Elétrico `oklch(65% 0.22 180)` - Destaque moderno e confiável
-- **Background**: Quase Branco `oklch(98% 0.005 240)` - Base neutra e clara
-- **Card**: Branco Puro `oklch(100% 0 0)` - Elevação e separação visual
+**Light Mode**: Minimalista, claro e profissional com azul sofisticado
+- **Primary Color**: Azul Profissional `oklch(50% 0.15 250)` - Confiança, tecnologia e estabilidade
+- **Accent Color**: Verde Moderno `oklch(60% 0.18 160)` - Crescimento, inovação e sucesso
+- **Background**: Cinza Muito Claro `oklch(98% 0.003 260)` - Base neutra e sofisticada
+- **Card**: Branco Puro `oklch(100% 0 0)` - Elevação e clareza
 
-**Dark Mode**: Sofisticado e imersivo com cores vibrantes que se destacam
-- **Primary Color**: Roxo Brilhante `oklch(65% 0.25 265)` - Maior luminosidade para fundos escuros
-- **Accent Color**: Turquesa Claro `oklch(70% 0.24 180)` - Contraste dinâmico
-- **Background**: Preto Azulado `oklch(10% 0.02 240)` - Profundidade sofisticada
-- **Card**: Grafite Escuro `oklch(14% 0.03 240)` - Camadas e hierarquia visual
-
-**Cyberpunk Mode**: Estética neon futurista com efeitos de brilho intensos
-- **Primary Color**: Magenta Neon `oklch(72% 0.28 320)` - Rosa elétrico hipnótico
-- **Accent Color**: Verde Neon `oklch(75% 0.27 140)` - Contraste cibernético marcante
-- **Secondary**: Ciano Neon `oklch(68% 0.26 180)` - Complemento tecnológico
-- **Background**: Preto Violeta `oklch(8% 0.04 300)` - Base escura com toque roxo
-- **Special Effects**: Todas as interações incluem halos neon (box-shadow), text-shadow em títulos, bordas luminosas
+**Dark Mode**: Elegante e contemporâneo com contraste refinado
+- **Primary Color**: Azul Vibrante `oklch(65% 0.18 250)` - Maior brilho para fundos escuros
+- **Accent Color**: Verde Elétrico `oklch(70% 0.20 160)` - Destaque dinâmico
+- **Background**: Grafite Profundo `oklch(12% 0.015 260)` - Sofisticação moderna
+- **Card**: Cinza Escuro `oklch(16% 0.02 260)` - Separação visual sutil
 
 - **Foreground/Background Pairings**:
-  - Light mode: Fundo `oklch(98% 0.005 240)` + Texto `oklch(15% 0.02 240)` - Ratio 18.2:1 ✓
-  - Dark mode: Fundo `oklch(10% 0.02 240)` + Texto `oklch(98% 0.005 240)` - Ratio 19.4:1 ✓
-  - Cyberpunk: Fundo `oklch(8% 0.04 300)` + Texto `oklch(95% 0.08 320)` - Ratio 16.8:1 ✓
-  - Primary button: `oklch(58% 0.24 265)` + Texto Branco `oklch(100% 0 0)` - Ratio 6.2:1 ✓
-  - Accent: `oklch(65% 0.22 180)` + Texto Branco `oklch(100% 0 0)` - Ratio 4.8:1 ✓
+  - Light mode: Fundo `oklch(98% 0.003 260)` + Texto `oklch(18% 0.01 260)` - Ratio 16.5:1 ✓
+  - Dark mode: Fundo `oklch(12% 0.015 260)` + Texto `oklch(96% 0.005 260)` - Ratio 18.1:1 ✓
+  - Primary button: `oklch(50% 0.15 250)` + Texto Branco `oklch(100% 0 0)` - Ratio 7.8:1 ✓
+  - Accent: `oklch(60% 0.18 160)` + Texto Branco `oklch(100% 0 0)` - Ratio 5.2:1 ✓
 
 ## Font Selection
 
@@ -128,42 +120,40 @@ Animations should create a sense of fluid, responsive interaction that feels bot
 - Scroll-triggered fade-up for content sections (300ms ease-out)
 - Staggered card reveals in service grid (100ms delay between each)
 - Smooth color transitions for theme switching (200ms)
-- Magnetic hover effects on CTAs with scale (1.02) and shadow
-- Background gradient animations (subtle, slow-moving for depth)
-- Matrix-style binary rain animation in hero background
-- Floating code symbols animated across the hero section
+- Subtle hover effects on CTAs with scale (1.02) and shadow
+- Background gradient animations (gentle, sophisticated movement)
+- Geometric grid pattern overlays for depth
+- Floating tech icons with smooth parallax effects
 - Form field focus with subtle glow and label float
-- Success states with checkmark animation and confetti micro-interaction
-- **Cyberpunk Mode**: Enhanced neon glow effects on all interactive elements, pulsing shadows, and intensified particle animations
+- Success states with checkmark animation
 
 ## Component Selection
 
 ### Components
-- **Navigation**: Custom sticky header with logo, menu links, and theme cycler (Light/Dark/Cyberpunk) - transparent on hero, solid background on scroll
-- **Hero**: Custom full-height section with gradient background, matrix-style animation canvas, animated text using framer-motion, floating code symbols
-- **Service Cards**: shadcn Card components with hover effects, icons from Phosphor, custom hover states with theme-aware glows
+- **Navigation**: Custom sticky header with logo, menu links, and theme toggle (Light/Dark) - transparent on hero, solid background on scroll
+- **Hero**: Custom full-height section with geometric gradient background, floating tech icons with parallax, animated text using framer-motion
+- **Service Cards**: shadcn Card components with smooth hover effects, icons from Phosphor, subtle elevation changes
 - **Tech Stack**: Custom grid layout with Badge components for tech logos/names
 - **About Section**: Card with custom layout, potential use of Separator for visual breaks
 - **Contact Form**: shadcn Form with Input, Textarea, Select (for service interest), Button - full validation with react-hook-form and zod
-- **Theme Cycler**: Custom button with sun/moon/lightning icons from Phosphor, positioned in header, cycles through three themes
+- **Theme Toggle**: Custom button with sun/moon icons from Phosphor, positioned in header
 - **Toast Notifications**: sonner for form submission feedback
 - **Footer**: Custom component with company info, links, social icons
 
 ### Customizations
-- **Gradient Backgrounds**: Custom CSS with animated gradients using repeating-radial-gradient and background-blend-mode
+- **Gradient Backgrounds**: Subtle geometric patterns and soft gradients for depth
 - **Scroll Progress Bar**: Custom component tracking scroll position with fixed bar at top
 - **Animated Section Wrapper**: Custom component using Intersection Observer and framer-motion for scroll-triggered animations
-- **Magnetic Buttons**: Custom hover effect using framer-motion for CTAs
-- **Glass Morphism Cards**: Custom styling with backdrop-filter and semi-transparent backgrounds
-- **Matrix Rain Animation**: Canvas-based binary code rain effect in hero background
-- **Cyberpunk Neon Effects**: CSS-based glow effects (box-shadow, text-shadow, drop-shadow) activated in cyberpunk theme
-- **Theme-Aware Components**: Dynamic styling based on active theme with enhanced effects for cyberpunk mode
+- **Hover Effects**: Smooth scale and shadow transitions for interactive elements
+- **Glass Morphism Cards**: Subtle backdrop-filter and semi-transparent backgrounds
+- **Geometric Pattern Overlays**: CSS grid patterns for visual interest without distraction
+- **Floating Icons**: Tech-related icons with gentle floating animations in hero section
 
 ### States
-- **Buttons**: Default (gradient background), Hover (scale + enhanced shadow + brightness), Active (scale down 0.98), Focus (ring), Disabled (opacity 0.5 + no interaction), Cyberpunk (neon glow shadows)
-- **Form Inputs**: Default (border subtle), Focus (border accent + glow), Error (border red + error message), Success (border green + checkmark), Disabled (opacity 0.6), Cyberpunk (glowing borders)
-- **Cards**: Default (subtle shadow), Hover (lifted shadow + subtle scale 1.02 + border glow), Cyberpunk (neon border glow)
-- **Theme Cycler**: Sun icon (light mode), Moon icon (dark mode), Lightning icon (cyberpunk mode), smooth icon transitions with rotation animation
+- **Buttons**: Default (solid background), Hover (scale 1.02 + shadow), Active (scale 0.98), Focus (ring), Disabled (opacity 0.5)
+- **Form Inputs**: Default (border subtle), Focus (border accent + subtle glow), Error (border destructive + message), Success (border accent + checkmark), Disabled (opacity 0.6)
+- **Cards**: Default (subtle shadow), Hover (elevated shadow + scale 1.01 + border highlight)
+- **Theme Toggle**: Moon icon (light mode), Sun icon (dark mode), smooth icon rotation on transition
 
 ### Icon Selection
 - **Navigation**: List/X (hamburger menu), MoonStars/Sun (theme toggle)

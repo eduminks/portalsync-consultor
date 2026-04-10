@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Moon, Sun, List, X, Lightning } from '@phosphor-icons/react'
+import { Moon, Sun, List, X } from '@phosphor-icons/react'
 import { Button } from '@/components/ui/button'
 import { useTheme } from '@/hooks/use-theme'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
@@ -9,7 +9,7 @@ import logoBlack from '@/assets/images/logo_preto.png'
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
-  const { theme, cycleTheme } = useTheme()
+  const { theme, toggleTheme } = useTheme()
   const [mobileOpen, setMobileOpen] = useState(false)
 
   useEffect(() => {
@@ -35,32 +35,6 @@ export function Header() {
     { label: 'Sobre', id: 'about' },
     { label: 'Contato', id: 'contact' },
   ]
-
-  const getThemeIcon = () => {
-    switch (theme) {
-      case 'light':
-        return <Moon className="h-5 w-5 relative z-10" weight="duotone" />
-      case 'dark':
-        return <Lightning className="h-5 w-5 relative z-10" weight="duotone" />
-      case 'cyberpunk':
-        return <Sun className="h-5 w-5 relative z-10" weight="duotone" />
-      default:
-        return <Moon className="h-5 w-5 relative z-10" weight="duotone" />
-    }
-  }
-
-  const getThemeLabel = () => {
-    switch (theme) {
-      case 'light':
-        return 'Claro'
-      case 'dark':
-        return 'Escuro'
-      case 'cyberpunk':
-        return 'Cyberpunk'
-      default:
-        return 'Tema'
-    }
-  }
 
   return (
     <motion.header
@@ -115,7 +89,7 @@ export function Header() {
             >
               <Button
                 variant="outline"
-                onClick={cycleTheme}
+                onClick={toggleTheme}
                 className="rounded-full gap-2 border-2 hover:bg-primary/10 hover:border-primary transition-all group relative overflow-hidden"
               >
                 <AnimatePresence mode="wait">
@@ -126,17 +100,23 @@ export function Header() {
                     exit={{ rotate: 180, opacity: 0 }}
                     transition={{ duration: 0.3 }}
                   >
-                    {getThemeIcon()}
+                    {theme === 'dark' ? (
+                      <Sun className="h-5 w-5 relative z-10" weight="duotone" />
+                    ) : (
+                      <Moon className="h-5 w-5 relative z-10" weight="duotone" />
+                    )}
                   </motion.div>
                 </AnimatePresence>
-                <span className="font-mono text-xs tracking-wider">{getThemeLabel()}</span>
+                <span className="font-mono text-xs tracking-wider">
+                  {theme === 'dark' ? 'Claro' : 'Escuro'}
+                </span>
               </Button>
             </motion.div>
 
             <Button
               variant="ghost"
               size="icon"
-              onClick={cycleTheme}
+              onClick={toggleTheme}
               className="sm:hidden rounded-full relative group"
             >
               <AnimatePresence mode="wait">
@@ -147,7 +127,11 @@ export function Header() {
                   exit={{ rotate: 180, opacity: 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  {getThemeIcon()}
+                  {theme === 'dark' ? (
+                    <Sun className="h-5 w-5 relative z-10" weight="duotone" />
+                  ) : (
+                    <Moon className="h-5 w-5 relative z-10" weight="duotone" />
+                  )}
                 </motion.div>
               </AnimatePresence>
             </Button>
