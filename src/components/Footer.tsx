@@ -1,6 +1,6 @@
 import { GithubLogo, LinkedinLogo, EnvelopeSimple } from '@phosphor-icons/react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useTheme } from '@/hooks/use-theme'
 import logoWhite from '@/assets/images/portalsync_branco_transp.png'
 import logoBlack from '@/assets/images/logo_preto-removebg-preview.png'
@@ -9,6 +9,11 @@ export function Footer() {
   const currentYear = new Date().getFullYear()
   const [hoveredLink, setHoveredLink] = useState<string | null>(null)
   const { theme } = useTheme()
+  const [currentLogo, setCurrentLogo] = useState<string>(logoBlack)
+
+  useEffect(() => {
+    setCurrentLogo(theme === 'dark' ? logoWhite : logoBlack)
+  }, [theme])
 
   const socialLinks = [
     { icon: GithubLogo, href: 'https://github.com', label: 'GitHub' },
@@ -47,8 +52,8 @@ export function Footer() {
             >
               <AnimatePresence mode="wait">
                 <motion.img
-                  key={theme}
-                  src={theme === 'dark' ? logoWhite : logoBlack}
+                  key={currentLogo}
+                  src={currentLogo}
                   alt="PortalSync"
                   className="h-32 w-auto object-contain"
                   initial={{ opacity: 0, scale: 0.9, filter: 'blur(4px)' }}
