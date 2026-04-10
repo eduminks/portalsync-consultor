@@ -73,7 +73,7 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="pt-12 lg:pt-16 pb-4 lg:pb-6 relative overflow-hidden bg-background">
+    <section id="contact" className="pt-0 pb-4 lg:pb-6 relative overflow-hidden bg-background">
       <WorldMap />
       
       <div className="absolute inset-0 bg-gradient-to-br from-background/70 via-background/80 to-background/70 pointer-events-none" style={{ zIndex: 1 }} />
