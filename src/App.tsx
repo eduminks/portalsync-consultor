@@ -17,11 +17,8 @@ function App() {
       <Header />
       <main>
         <Hero />
-        <SectionDivider />
         <Services />
-        <SectionDivider />
         <TechStack />
-        <SectionDivider />
         <About />
         <SectionDivider />
         <Contact />
