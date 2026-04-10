@@ -11,7 +11,7 @@ export function Hero() {
   const [particles, setParticles] = useState<Array<{id: number, x: number, y: number, size: number, delay: number}>>([])
 
   useEffect(() => {
-    const newParticles = Array.from({ length: 20 }, (_, i) => ({
+    const newParticles = Array.from({ length: 30 }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
@@ -34,12 +34,13 @@ export function Hero() {
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-accent/10" />
-      <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_20%_50%,hsl(var(--primary)/0.05)_2px,transparent_2px),radial-gradient(circle_at_80%_50%,hsl(var(--accent)/0.05)_2px,transparent_2px)] bg-[length:100px_100px]" />
+      <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_30%_40%,var(--primary)_0%,transparent_50%),radial-gradient(circle_at_70%_60%,var(--accent)_0%,transparent_50%)] blur-3xl" />
+      <div className="absolute inset-0 opacity-20 bg-[repeating-linear-gradient(90deg,transparent_0px,transparent_50px,var(--primary)_50px,var(--primary)_51px),repeating-linear-gradient(0deg,transparent_0px,transparent_50px,var(--accent)_50px,var(--accent)_51px)]" />
       
       {particles.map((particle) => (
         <motion.div
           key={particle.id}
-          className="absolute rounded-full bg-primary/20"
+          className="absolute rounded-full bg-gradient-to-br from-primary/30 to-accent/30"
           style={{
             left: `${particle.x}%`,
             top: `${particle.y}%`,
@@ -47,12 +48,12 @@ export function Hero() {
             height: particle.size,
           }}
           animate={{
-            y: [0, -30, 0],
-            opacity: [0.2, 0.5, 0.2],
-            scale: [1, 1.2, 1],
+            y: [0, -40, 0],
+            opacity: [0.2, 0.6, 0.2],
+            scale: [1, 1.3, 1],
           }}
           transition={{
-            duration: 4,
+            duration: 5,
             delay: particle.delay,
             repeat: Infinity,
             ease: "easeInOut",

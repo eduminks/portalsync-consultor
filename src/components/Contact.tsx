@@ -75,10 +75,10 @@ export function Contact() {
   return (
     <section id="contact" className="py-24 lg:py-32 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5" />
-      <div className="absolute inset-0 opacity-20 bg-[repeating-linear-gradient(45deg,transparent,transparent_20px,hsl(var(--primary)/0.03)_20px,hsl(var(--primary)/0.03)_40px)]" />
+      <div className="absolute inset-0 opacity-30 bg-[repeating-linear-gradient(45deg,transparent,transparent_30px,var(--primary)_30px,var(--primary)_31px),repeating-linear-gradient(-45deg,transparent,transparent_30px,var(--accent)_30px,var(--accent)_31px)]" />
       
       <motion.div
-        className="absolute top-10 right-10 w-72 h-72 rounded-full bg-accent/10 blur-3xl"
+        className="absolute top-10 right-10 w-72 h-72 rounded-full bg-gradient-to-br from-accent/20 to-primary/20 blur-3xl"
         animate={{
           scale: [1, 1.2, 1],
           opacity: [0.3, 0.5, 0.3],
@@ -86,7 +86,7 @@ export function Contact() {
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute bottom-10 left-10 w-96 h-96 rounded-full bg-primary/10 blur-3xl"
+        className="absolute bottom-10 left-10 w-96 h-96 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 blur-3xl"
         animate={{
           scale: [1, 1.3, 1],
           opacity: [0.3, 0.5, 0.3],

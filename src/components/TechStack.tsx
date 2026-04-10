@@ -27,7 +27,7 @@ export function TechStack() {
   
   return (
     <section id="tech" className="py-24 lg:py-32 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,hsl(var(--accent)/0.03)_1px,transparent_1px)] bg-[length:32px_32px]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--accent)_1px,transparent_1px)] bg-[length:32px_32px] opacity-[0.05]" />
       
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
         <AnimatedSection className="text-center mb-16">

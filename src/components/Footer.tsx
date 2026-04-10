@@ -1,10 +1,14 @@
 import { GithubLogo, LinkedinLogo, EnvelopeSimple } from '@phosphor-icons/react'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
+import { useTheme } from '@/hooks/use-theme'
+import logoWhite from '@/assets/images/portalsync_branco_transp.png'
+import logoBlack from '@/assets/images/logo_preto.png'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
   const [hoveredLink, setHoveredLink] = useState<string | null>(null)
+  const { theme } = useTheme()
 
   const socialLinks = [
     { icon: GithubLogo, href: 'https://github.com', label: 'GitHub' },
@@ -38,10 +42,14 @@ export function Footer() {
             transition={{ duration: 0.5 }}
           >
             <motion.div 
-              className="font-bold text-2xl bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-4 inline-block"
+              className="mb-4"
               whileHover={{ scale: 1.05 }}
             >
-              PortalSync
+              <img 
+                src={theme === 'dark' ? logoWhite : logoBlack} 
+                alt="PortalSync" 
+                className="h-8 w-auto object-contain"
+              />
             </motion.div>
             <p className="text-muted-foreground">
               Transformando ideias em soluções digitais de alto impacto.

@@ -100,7 +100,7 @@ export function Services() {
   return (
     <section id="services" className="py-24 lg:py-32 bg-muted/30 relative overflow-hidden">
       <motion.div
-        className="absolute top-20 left-10 w-64 h-64 rounded-full bg-primary/5 blur-3xl"
+        className="absolute top-20 left-10 w-64 h-64 rounded-full bg-gradient-to-br from-primary/10 to-accent/10 blur-3xl"
         animate={{
           scale: [1, 1.2, 1],
           opacity: [0.3, 0.5, 0.3],
@@ -108,7 +108,7 @@ export function Services() {
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute bottom-20 right-10 w-64 h-64 rounded-full bg-accent/5 blur-3xl"
+        className="absolute bottom-20 right-10 w-64 h-64 rounded-full bg-gradient-to-br from-accent/10 to-primary/10 blur-3xl"
         animate={{
           scale: [1, 1.3, 1],
           opacity: [0.3, 0.5, 0.3],

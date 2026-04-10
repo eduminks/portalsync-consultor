@@ -77,18 +77,18 @@ The design should evoke feelings of technological sophistication, professional r
 
 ## Color Selection
 
-A sophisticated tech-forward palette built around deep blues and electric accents that conveys innovation and professionalism.
+A vibrant tech-forward palette inspired by PortalSync's brand identity, combining deep purples with electric cyan accents that convey innovation and digital transformation.
 
-- **Primary Color**: Deep Electric Blue `oklch(0.45 0.19 252)` - Represents technology, trust, and innovation; used for primary CTAs and key interactive elements
+- **Primary Color**: Electric Purple `oklch(55% 0.25 285)` - Represents innovation, technology, and creativity; used for primary CTAs and key interactive elements
 - **Secondary Colors**: 
-  - Midnight Blue `oklch(0.15 0.08 252)` - Deep backgrounds for dark mode, creating depth
-  - Soft Slate `oklch(0.92 0.01 252)` - Light backgrounds and cards in light mode
-- **Accent Color**: Cyber Cyan `oklch(0.75 0.15 195)` - Attention-grabbing highlight for hover states, important badges, and interactive elements
+  - Deep Slate `oklch(92% 0.01 264)` - Light backgrounds and cards in light mode
+  - Dark Purple `oklch(18% 0.04 264)` - Card backgrounds for dark mode, creating depth and sophistication
+- **Accent Color**: Bright Cyan `oklch(70% 0.15 195)` - Attention-grabbing highlight for hover states, important badges, and interactive elements
 - **Foreground/Background Pairings**:
-  - Light mode background (Soft Slate `oklch(0.98 0.005 252)`): Dark text `oklch(0.15 0.02 252)` - Ratio 14.2:1 ✓
-  - Dark mode background (Midnight `oklch(0.12 0.06 252)`): Light text `oklch(0.97 0.01 252)` - Ratio 16.8:1 ✓
-  - Primary buttons (Electric Blue `oklch(0.45 0.19 252)`): White text `oklch(1 0 0)` - Ratio 6.8:1 ✓
-  - Accent (Cyber Cyan `oklch(0.75 0.15 195)`): Dark text `oklch(0.15 0.02 252)` - Ratio 9.2:1 ✓
+  - Light mode background (Soft Slate `oklch(98% 0.01 264)`): Dark text `oklch(20% 0.02 264)` - Ratio 15.8:1 ✓
+  - Dark mode background (Deep Purple `oklch(15% 0.03 264)`): Light text `oklch(97% 0.01 264)` - Ratio 17.2:1 ✓
+  - Primary buttons (Electric Purple `oklch(55% 0.25 285)`): White text `oklch(100% 0 0)` - Ratio 7.1:1 ✓
+  - Accent (Bright Cyan `oklch(70% 0.15 195)`): Dark text `oklch(20% 0.02 264)` - Ratio 8.9:1 ✓
 
 ## Font Selection
 

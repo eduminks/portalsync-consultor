@@ -4,6 +4,8 @@ import { Moon, Sun, List, X } from '@phosphor-icons/react'
 import { Button } from '@/components/ui/button'
 import { useTheme } from '@/hooks/use-theme'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import logoWhite from '@/assets/images/portalsync_branco_transp.png'
+import logoBlack from '@/assets/images/logo_preto.png'
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
@@ -47,12 +49,18 @@ export function Header() {
     >
       <div className="container mx-auto px-6 lg:px-12">
         <div className="flex items-center justify-between h-20">
-          <div 
-            className="font-bold text-2xl bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent cursor-pointer"
+          <motion.div 
+            className="cursor-pointer"
             onClick={() => scrollToSection('hero')}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            PortalSync
-          </div>
+            <img 
+              src={theme === 'dark' ? logoWhite : logoBlack} 
+              alt="PortalSync" 
+              className="h-10 w-auto object-contain"
+            />
+          </motion.div>
 
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
