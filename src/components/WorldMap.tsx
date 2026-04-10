@@ -89,8 +89,8 @@ export function WorldMap() {
     })
   }, [connections])
 
-  const mapOpacity = theme === 'dark' ? 0.12 : 0.08
-  const connectionOpacity = theme === 'dark' ? 0.4 : 0.3
+  const mapOpacity = theme === 'dark' ? 0.25 : 0.18
+  const connectionOpacity = theme === 'dark' ? 0.6 : 0.5
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 0 }}>
