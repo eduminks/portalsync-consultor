@@ -46,7 +46,7 @@ export function Footer() {
               <img 
                 src={logoBlack} 
                 alt="PortalSync" 
-                className="h-32 w-auto object-contain dark:hidden"
+                className="h-32 w-auto object-contain block dark:hidden"
               />
               <img 
                 src={logoWhite} 
