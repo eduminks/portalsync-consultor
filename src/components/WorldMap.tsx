@@ -10,18 +10,18 @@ interface Connection {
 }
 
 const cities = [
-  { x: 18, y: 25, name: 'New York' },
-  { x: 12, y: 18, name: 'Vancouver' },
-  { x: 26, y: 60, name: 'São Paulo' },
-  { x: 48, y: 22, name: 'London' },
-  { x: 50, y: 24, name: 'Paris' },
-  { x: 55, y: 32, name: 'Cairo' },
-  { x: 62, y: 28, name: 'Dubai' },
-  { x: 70, y: 30, name: 'Mumbai' },
-  { x: 78, y: 26, name: 'Singapore' },
-  { x: 85, y: 22, name: 'Tokyo' },
-  { x: 88, y: 64, name: 'Sydney' },
-  { x: 56, y: 56, name: 'Cape Town' },
+  { x: 18, y: 18, name: 'New York' },
+  { x: 12, y: 12, name: 'Vancouver' },
+  { x: 26, y: 38, name: 'São Paulo' },
+  { x: 48, y: 16, name: 'London' },
+  { x: 50, y: 18, name: 'Paris' },
+  { x: 55, y: 22, name: 'Cairo' },
+  { x: 62, y: 20, name: 'Dubai' },
+  { x: 70, y: 22, name: 'Mumbai' },
+  { x: 78, y: 20, name: 'Singapore' },
+  { x: 85, y: 16, name: 'Tokyo' },
+  { x: 88, y: 42, name: 'Sydney' },
+  { x: 56, y: 40, name: 'Cape Town' },
 ]
 
 const generateConnections = (): Connection[] => {
