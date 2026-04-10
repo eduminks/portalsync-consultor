@@ -50,16 +50,23 @@ export function Header() {
       <div className="container mx-auto px-6 lg:px-12">
         <div className="flex items-center justify-between h-20">
           <motion.div 
-            className="cursor-pointer"
+            className="cursor-pointer relative h-16"
             onClick={() => scrollToSection('hero')}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <img 
-              src={theme === 'dark' ? logoWhite : logoBlack} 
-              alt="PortalSync" 
-              className="h-16 w-auto object-contain"
-            />
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={theme}
+                src={theme === 'dark' ? logoWhite : logoBlack}
+                alt="PortalSync"
+                className="h-16 w-auto object-contain"
+                initial={{ opacity: 0, scale: 0.9, filter: 'blur(4px)' }}
+                animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                exit={{ opacity: 0, scale: 0.9, filter: 'blur(4px)' }}
+                transition={{ duration: 0.4, ease: 'easeInOut' }}
+              />
+            </AnimatePresence>
           </motion.div>
 
           <nav className="hidden md:flex items-center gap-8">

@@ -1,5 +1,5 @@
 import { GithubLogo, LinkedinLogo, EnvelopeSimple } from '@phosphor-icons/react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import { useTheme } from '@/hooks/use-theme'
 import logoWhite from '@/assets/images/portalsync_branco_transp.png'
@@ -42,15 +42,21 @@ export function Footer() {
             transition={{ duration: 0.5 }}
           >
             <motion.div 
-              className="mb-4"
+              className="mb-4 relative h-32"
               whileHover={{ scale: 1.05 }}
             >
-              <img 
-                src={theme === 'dark' ? logoWhite : logoBlack} 
-                alt="PortalSync" 
-                className="h-32 w-auto object-contain"
-                key={theme}
-              />
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={theme}
+                  src={theme === 'dark' ? logoWhite : logoBlack}
+                  alt="PortalSync"
+                  className="h-32 w-auto object-contain"
+                  initial={{ opacity: 0, scale: 0.9, filter: 'blur(4px)' }}
+                  animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                  exit={{ opacity: 0, scale: 0.9, filter: 'blur(4px)' }}
+                  transition={{ duration: 0.4, ease: 'easeInOut' }}
+                />
+              </AnimatePresence>
             </motion.div>
             <p className="text-muted-foreground">
               Transformando ideias em soluções digitais de alto impacto.
