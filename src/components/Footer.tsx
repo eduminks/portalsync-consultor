@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { useTheme } from '@/hooks/use-theme'
 import logoWhite from '@/assets/images/portalsync_branco_transp.png'
-import logoBlack from '@/assets/images/logo_preto.png'
+import logoBlack from '@/assets/images/logo_preto-removebg-preview.png'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -46,9 +46,9 @@ export function Footer() {
               whileHover={{ scale: 1.05 }}
             >
               <img 
-                src={theme === 'light' ? logoBlack : logoWhite} 
+                src={theme === 'dark' ? logoWhite : logoBlack} 
                 alt="PortalSync" 
-                className="h-8 w-auto object-contain"
+                className="h-16 w-auto object-contain"
               />
             </motion.div>
             <p className="text-muted-foreground">
