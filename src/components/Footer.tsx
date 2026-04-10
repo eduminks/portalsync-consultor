@@ -9,8 +9,6 @@ export function Footer() {
   const currentYear = new Date().getFullYear()
   const [hoveredLink, setHoveredLink] = useState<string | null>(null)
   const { theme } = useTheme()
-  
-  const isDark = theme === 'dark'
 
   const socialLinks = [
     { icon: GithubLogo, href: 'https://github.com', label: 'GitHub' },
@@ -48,7 +46,7 @@ export function Footer() {
               whileHover={{ scale: 1.05 }}
             >
               <img 
-                src={isDark ? logoWhite : logoBlack} 
+                src={theme === 'dark' ? logoWhite : logoBlack} 
                 alt="PortalSync" 
                 className="h-32 w-auto object-contain"
               />

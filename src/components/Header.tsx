@@ -56,7 +56,7 @@ export function Header() {
             whileTap={{ scale: 0.95 }}
           >
             <img 
-              src={theme === 'light' ? logoBlack : logoWhite} 
+              src={theme === 'dark' ? logoWhite : logoBlack} 
               alt="PortalSync" 
               className="h-16 w-auto object-contain"
             />
