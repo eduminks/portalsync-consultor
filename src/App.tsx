@@ -8,6 +8,7 @@ import { Contact } from '@/components/Contact'
 import { Footer } from '@/components/Footer'
 import { ScrollProgress } from '@/components/ScrollProgress'
 import { ScrollToTop } from '@/components/ScrollToTop'
+import { SectionDivider } from '@/components/SectionDivider'
 
 function App() {
   return (
@@ -16,9 +17,13 @@ function App() {
       <Header />
       <main>
         <Hero />
+        <SectionDivider />
         <Services />
+        <SectionDivider />
         <TechStack />
+        <SectionDivider />
         <About />
+        <SectionDivider />
         <Contact />
       </main>
       <Footer />
