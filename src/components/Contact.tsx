@@ -74,11 +74,7 @@ export function Contact() {
   return (
     <section id="contact" className="py-24 lg:py-32 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5" />
-      <div className="absolute inset-0 opacity-20"
-        style={{
-          backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 20px, oklch(0.45 0.19 252 / 0.03) 20px, oklch(0.45 0.19 252 / 0.03) 40px)`
-        }}
-      />
+      <div className="absolute inset-0 opacity-20 bg-[repeating-linear-gradient(45deg,transparent,transparent_20px,hsl(var(--primary)/0.03)_20px,hsl(var(--primary)/0.03)_40px)]" />
       
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
         <AnimatedSection className="text-center mb-16">

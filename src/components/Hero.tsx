@@ -16,12 +16,7 @@ export function Hero() {
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-accent/10" />
-      <div className="absolute inset-0 opacity-30"
-        style={{
-          backgroundImage: `repeating-radial-gradient(circle at 20% 50%, transparent 0, oklch(0.45 0.19 252 / 0.05) 2px, transparent 4px, transparent 100px),
-                           repeating-radial-gradient(circle at 80% 50%, transparent 0, oklch(0.75 0.15 195 / 0.05) 2px, transparent 4px, transparent 100px)`
-        }}
-      />
+      <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_20%_50%,hsl(var(--primary)/0.05)_2px,transparent_2px),radial-gradient(circle_at_80%_50%,hsl(var(--accent)/0.05)_2px,transparent_2px)] bg-[length:100px_100px]" />
 
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
