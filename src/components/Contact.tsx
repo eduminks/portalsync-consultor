@@ -77,26 +77,9 @@ export function Contact() {
     <section id="contact" className="py-24 lg:py-32 relative overflow-hidden">
       <WorldMap />
       
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background/95 to-accent/5" />
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background/95 to-accent/5 pointer-events-none" style={{ zIndex: 1 }} />
       
-      <motion.div
-        className="absolute top-10 right-10 w-72 h-72 rounded-full bg-gradient-to-br from-accent/20 to-primary/20 blur-3xl"
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.3, 0.5, 0.3],
-        }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="absolute bottom-10 left-10 w-96 h-96 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 blur-3xl"
-        animate={{
-          scale: [1, 1.3, 1],
-          opacity: [0.3, 0.5, 0.3],
-        }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-      />
-      
-      <div className="container mx-auto px-6 lg:px-12 relative z-10">
+      <div className="container mx-auto px-6 lg:px-12 relative" style={{ zIndex: 2 }}>
         <AnimatedSection className="text-center mb-16">
           <motion.div 
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-4 backdrop-blur-sm"
