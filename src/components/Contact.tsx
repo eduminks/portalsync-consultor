@@ -73,10 +73,10 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="py-24 lg:py-32 relative overflow-hidden">
+    <section id="contact" className="py-24 lg:py-32 relative overflow-hidden bg-background">
       <WorldMap />
       
-      <div className="absolute inset-0 bg-gradient-to-br from-background/70 via-background/85 to-background/70 pointer-events-none" style={{ zIndex: 1 }} />
+      <div className="absolute inset-0 bg-gradient-to-br from-background/50 via-background/60 to-background/50 pointer-events-none" style={{ zIndex: 1 }} />
       
       <div className="container mx-auto px-6 lg:px-12 relative" style={{ zIndex: 2 }}>
         <AnimatedSection className="text-center mb-16">
