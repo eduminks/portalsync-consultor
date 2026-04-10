@@ -1,24 +1,103 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowDown, Rocket, Sparkle } from '@phosphor-icons/react'
+import { ArrowDown, Rocket, Code, Terminal, BracketsCurly, GitBranch } from '@phosphor-icons/react'
 import { Button } from '@/components/ui/button'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
+
+interface MatrixColumn {
+  id: number
+  x: number
+  speed: number
+  characters: string
+  delay: number
+}
+
+interface BinaryParticle {
+  id: number
+  x: number
+  y: number
+  value: string
+  delay: number
+  duration: number
+}
 
 export function Hero() {
   const { scrollY } = useScroll()
   const y = useTransform(scrollY, [0, 500], [0, 150])
   const opacity = useTransform(scrollY, [0, 300], [1, 0])
   
-  const [particles, setParticles] = useState<Array<{id: number, x: number, y: number, size: number, delay: number}>>([])
+  const [matrixColumns, setMatrixColumns] = useState<MatrixColumn[]>([])
+  const [binaryParticles, setBinaryParticles] = useState<BinaryParticle[]>([])
+  const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
-    const newParticles = Array.from({ length: 30 }, (_, i) => ({
+    const columns = Array.from({ length: 25 }, (_, i) => ({
+      id: i,
+      x: (i / 25) * 100,
+      speed: Math.random() * 3 + 2,
+      characters: '{ } [ ] < > / \\ ; : = + - * # @ $ % & |',
+      delay: Math.random() * 2,
+    }))
+    setMatrixColumns(columns)
+
+    const particles = Array.from({ length: 40 }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
-      size: Math.random() * 4 + 2,
+      value: Math.random() > 0.5 ? '0' : '1',
       delay: Math.random() * 5,
+      duration: Math.random() * 10 + 10,
     }))
-    setParticles(newParticles)
+    setBinaryParticles(particles)
+  }, [])
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+
+    const resizeCanvas = () => {
+      canvas.width = canvas.offsetWidth
+      canvas.height = canvas.offsetHeight
+    }
+    resizeCanvas()
+    window.addEventListener('resize', resizeCanvas)
+
+    const chars = '01'
+    const fontSize = 14
+    const columns = Math.floor(canvas.width / fontSize)
+    const drops: number[] = Array(columns).fill(0)
+
+    const draw = () => {
+      ctx.fillStyle = 'rgba(var(--background), 0.05)'
+      ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+      ctx.fillStyle = 'var(--primary)'
+      ctx.font = `${fontSize}px JetBrains Mono, monospace`
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = chars[Math.floor(Math.random() * chars.length)]
+        const x = i * fontSize
+        const y = drops[i] * fontSize
+
+        ctx.fillStyle = i % 3 === 0 ? 'var(--accent)' : 'var(--primary)'
+        ctx.globalAlpha = Math.random() * 0.5 + 0.3
+        ctx.fillText(text, x, y)
+
+        if (y > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0
+        }
+        drops[i]++
+      }
+    }
+
+    const interval = setInterval(draw, 50)
+
+    return () => {
+      clearInterval(interval)
+      window.removeEventListener('resize', resizeCanvas)
+    }
   }, [])
 
   const scrollToContact = () => {
@@ -33,60 +112,120 @@ export function Hero() {
       id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-accent/10" />
-      <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_30%_40%,var(--primary)_0%,transparent_50%),radial-gradient(circle_at_70%_60%,var(--accent)_0%,transparent_50%)] blur-3xl" />
-      <div className="absolute inset-0 opacity-20 bg-[repeating-linear-gradient(90deg,transparent_0px,transparent_50px,var(--primary)_50px,var(--primary)_51px),repeating-linear-gradient(0deg,transparent_0px,transparent_50px,var(--accent)_50px,var(--accent)_51px)]" />
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5" />
       
-      {particles.map((particle) => (
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 w-full h-full opacity-30"
+      />
+
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,var(--primary)_0%,transparent_50%)] opacity-20 blur-3xl" />
+      
+      {matrixColumns.map((column) => (
+        <motion.div
+          key={column.id}
+          className="absolute top-0 font-mono text-xs text-primary/40 whitespace-pre"
+          style={{
+            left: `${column.x}%`,
+          }}
+          initial={{ y: -100 }}
+          animate={{ y: '100vh' }}
+          transition={{
+            duration: column.speed,
+            delay: column.delay,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        >
+          {column.characters.split('').map((char, i) => (
+            <div key={i} className="leading-tight">
+              {char}
+            </div>
+          ))}
+        </motion.div>
+      ))}
+      
+      {binaryParticles.map((particle) => (
         <motion.div
           key={particle.id}
-          className="absolute rounded-full bg-gradient-to-br from-primary/30 to-accent/30"
+          className="absolute font-mono text-xl font-bold"
           style={{
             left: `${particle.x}%`,
             top: `${particle.y}%`,
-            width: particle.size,
-            height: particle.size,
           }}
           animate={{
-            y: [0, -40, 0],
-            opacity: [0.2, 0.6, 0.2],
-            scale: [1, 1.3, 1],
+            y: [0, -50, 0],
+            opacity: [0.1, 0.8, 0.1],
+            scale: [0.8, 1.2, 0.8],
+            color: ['var(--primary)', 'var(--accent)', 'var(--primary)'],
           }}
           transition={{
-            duration: 5,
+            duration: particle.duration,
             delay: particle.delay,
             repeat: Infinity,
             ease: "easeInOut",
           }}
-        />
+        >
+          {particle.value}
+        </motion.div>
       ))}
       
       <motion.div 
-        className="absolute top-20 left-10 text-accent/30"
+        className="absolute top-20 left-10 text-accent/40"
         animate={{ 
           rotate: 360,
-          scale: [1, 1.2, 1],
+          scale: [1, 1.3, 1],
         }}
         transition={{ 
           rotate: { duration: 20, repeat: Infinity, ease: "linear" },
           scale: { duration: 3, repeat: Infinity, ease: "easeInOut" },
         }}
       >
-        <Sparkle size={40} weight="duotone" />
+        <Code size={48} weight="duotone" />
       </motion.div>
       
       <motion.div 
-        className="absolute bottom-32 right-20 text-primary/20"
+        className="absolute top-40 right-16 text-primary/30"
+        animate={{ 
+          rotate: [0, 10, -10, 0],
+          y: [0, -15, 0],
+        }}
+        transition={{ 
+          duration: 5,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      >
+        <Terminal size={56} weight="duotone" />
+      </motion.div>
+
+      <motion.div 
+        className="absolute bottom-32 right-20 text-accent/25"
         animate={{ 
           rotate: -360,
-          y: [0, -20, 0],
+          x: [0, 20, 0],
         }}
         transition={{ 
           rotate: { duration: 15, repeat: Infinity, ease: "linear" },
-          y: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+          x: { duration: 4, repeat: Infinity, ease: "easeInOut" },
         }}
       >
-        <Sparkle size={60} weight="duotone" />
+        <BracketsCurly size={64} weight="duotone" />
+      </motion.div>
+
+      <motion.div 
+        className="absolute bottom-48 left-16 text-primary/20"
+        animate={{ 
+          scale: [1, 1.2, 1],
+          rotate: [0, 180, 360],
+        }}
+        transition={{ 
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      >
+        <GitBranch size={52} weight="duotone" />
       </motion.div>
 
       <motion.div 
