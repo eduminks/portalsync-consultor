@@ -29,7 +29,7 @@ export function Footer() {
   ]
 
   return (
-    <footer className="bg-muted/50 border-t border-border py-12 relative overflow-hidden">
+    <footer className="bg-muted/50 border-t border-border py-8 relative overflow-hidden">
       <motion.div
         className="absolute top-0 left-0 w-96 h-96 rounded-full bg-primary/5 blur-3xl"
         animate={{
@@ -40,7 +40,7 @@ export function Footer() {
       />
       
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -143,7 +143,7 @@ export function Footer() {
         </div>
 
         <motion.div 
-          className="pt-8 border-t border-border text-center text-sm text-muted-foreground"
+          className="pt-6 border-t border-border text-center text-sm text-muted-foreground"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.3 }}

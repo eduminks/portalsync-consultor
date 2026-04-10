@@ -26,11 +26,11 @@ export function TechStack() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   
   return (
-    <section id="tech" className="py-24 lg:py-32 relative overflow-hidden">
+    <section id="tech" className="py-16 lg:py-20 relative overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--accent)_1px,transparent_1px)] bg-[length:32px_32px] opacity-[0.05]" />
       
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
-        <AnimatedSection className="text-center mb-16">
+        <AnimatedSection className="text-center mb-12">
           <motion.div 
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-4 backdrop-blur-sm"
             whileHover={{ scale: 1.05 }}

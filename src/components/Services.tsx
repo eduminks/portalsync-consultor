@@ -98,7 +98,7 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
 
 export function Services() {
   return (
-    <section id="services" className="py-24 lg:py-32 bg-muted/30 relative overflow-hidden">
+    <section id="services" className="py-16 lg:py-20 bg-muted/30 relative overflow-hidden">
       <motion.div
         className="absolute top-20 left-10 w-64 h-64 rounded-full bg-gradient-to-br from-primary/10 to-accent/10 blur-3xl"
         animate={{
@@ -117,7 +117,7 @@ export function Services() {
       />
       
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
-        <AnimatedSection className="text-center mb-16">
+        <AnimatedSection className="text-center mb-12">
           <motion.div 
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-4 backdrop-blur-sm"
             whileHover={{ scale: 1.05 }}
