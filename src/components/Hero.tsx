@@ -45,13 +45,15 @@ export function Hero() {
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       <div className="absolute inset-0 w-full h-full overflow-hidden">
-        <iframe
-          className="absolute top-1/2 left-1/2 w-[100vw] h-[100vh] min-w-[177.77vh] min-h-[56.25vw] -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-          src="https://www.youtube.com/embed/hrs0_uY6pzk?autoplay=1&mute=1&loop=1&playlist=hrs0_uY6pzk&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1"
-          title="Background Video"
-          allow="autoplay; encrypted-media"
-          style={{ border: 'none' }}
-        />
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute top-1/2 left-1/2 w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+        >
+          <source src="https://cdn.pixabay.com/video/2023/08/23/176989-857450854_large.mp4" type="video/mp4" />
+        </video>
       </div>
       
       <div className="absolute inset-0 bg-gradient-to-br from-background/60 via-background/40 to-background/60 backdrop-blur-[2px]" />
