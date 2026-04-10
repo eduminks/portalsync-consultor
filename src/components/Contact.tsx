@@ -100,8 +100,8 @@ export function Contact() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-4 backdrop-blur-sm"
             whileHover={{ scale: 1.05 }}
           >
-            <Envelope className="text-accent-foreground" weight="duotone" size={16} />
-            <span className="text-xs font-mono uppercase tracking-wider text-accent-foreground">
+            <Envelope className="text-accent" weight="duotone" size={16} />
+            <span className="text-xs font-mono uppercase tracking-wider text-accent">
               Entre em Contato
             </span>
           </motion.div>

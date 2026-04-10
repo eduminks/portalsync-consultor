@@ -35,7 +35,7 @@ export function TechStack() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-4 backdrop-blur-sm"
             whileHover={{ scale: 1.05 }}
           >
-            <span className="text-xs font-mono uppercase tracking-wider text-accent-foreground">
+            <span className="text-xs font-mono uppercase tracking-wider text-accent">
               Stack Tecnológico
             </span>
           </motion.div>

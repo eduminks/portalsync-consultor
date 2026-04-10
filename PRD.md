@@ -77,32 +77,33 @@ The design should evoke feelings of technological sophistication, professional r
 
 ## Color Selection
 
-A vibrant tech-forward palette inspired by PortalSync's brand identity, combining deep purples with electric cyan accents that convey innovation and digital transformation. Three distinct themes are available:
+Uma paleta moderna e vibrante que equilibra profissionalismo com inovação tecnológica. Três temas distintos oferecem experiências visuais únicas:
 
-**Light Mode**: Clean and professional with subtle purple accents
-- **Primary Color**: Electric Purple `oklch(55% 0.25 285)` - Represents innovation, technology, and creativity
-- **Secondary Colors**: 
-  - Deep Slate `oklch(92% 0.01 264)` - Light backgrounds and cards
-- **Accent Color**: Bright Cyan `oklch(70% 0.15 195)` - Attention-grabbing highlight
+**Light Mode**: Leve, limpo e profissional com toques vibrantes de roxo e turquesa
+- **Primary Color**: Violeta Vibrante `oklch(58% 0.24 265)` - Energia, tecnologia e criatividade
+- **Accent Color**: Turquesa Elétrico `oklch(65% 0.22 180)` - Destaque moderno e confiável
+- **Background**: Quase Branco `oklch(98% 0.005 240)` - Base neutra e clara
+- **Card**: Branco Puro `oklch(100% 0 0)` - Elevação e separação visual
 
-**Dark Mode**: Sophisticated and modern with vibrant accents
-- **Primary Color**: Brighter Purple `oklch(60% 0.25 285)` - Enhanced visibility on dark backgrounds
-- **Background**: Deep Purple `oklch(15% 0.03 264)` - Creating depth and sophistication
-- **Accent Color**: Lighter Cyan `oklch(75% 0.15 195)` - Stands out on dark backgrounds
+**Dark Mode**: Sofisticado e imersivo com cores vibrantes que se destacam
+- **Primary Color**: Roxo Brilhante `oklch(65% 0.25 265)` - Maior luminosidade para fundos escuros
+- **Accent Color**: Turquesa Claro `oklch(70% 0.24 180)` - Contraste dinâmico
+- **Background**: Preto Azulado `oklch(10% 0.02 240)` - Profundidade sofisticada
+- **Card**: Grafite Escuro `oklch(14% 0.03 240)` - Camadas e hierarquia visual
 
-**Cyberpunk Mode**: Neon-infused futuristic aesthetic with intense glows
-- **Primary Color**: Hot Magenta `oklch(70% 0.30 330)` - Vivid neon pink for maximum impact
-- **Secondary Color**: Electric Cyan `oklch(65% 0.28 195)` - Complementary neon blue
-- **Accent Color**: Neon Green `oklch(75% 0.25 150)` - Striking highlight color
-- **Background**: Deep Dark Blue `oklch(12% 0.08 280)` - Nearly black with blue undertone
-- **Special Effects**: All interactive elements include neon glow shadows, text-shadow on headings, and enhanced border glows
+**Cyberpunk Mode**: Estética neon futurista com efeitos de brilho intensos
+- **Primary Color**: Magenta Neon `oklch(72% 0.28 320)` - Rosa elétrico hipnótico
+- **Accent Color**: Verde Neon `oklch(75% 0.27 140)` - Contraste cibernético marcante
+- **Secondary**: Ciano Neon `oklch(68% 0.26 180)` - Complemento tecnológico
+- **Background**: Preto Violeta `oklch(8% 0.04 300)` - Base escura com toque roxo
+- **Special Effects**: Todas as interações incluem halos neon (box-shadow), text-shadow em títulos, bordas luminosas
 
 - **Foreground/Background Pairings**:
-  - Light mode background (Soft Slate `oklch(98% 0.01 264)`): Dark text `oklch(20% 0.02 264)` - Ratio 15.8:1 ✓
-  - Dark mode background (Deep Purple `oklch(15% 0.03 264)`): Light text `oklch(97% 0.01 264)` - Ratio 17.2:1 ✓
-  - Cyberpunk background (Deep Dark Blue `oklch(12% 0.08 280)`): Neon Pink text `oklch(95% 0.15 330)` - Ratio 14.5:1 ✓
-  - Primary buttons (Electric Purple `oklch(55% 0.25 285)`): White text `oklch(100% 0 0)` - Ratio 7.1:1 ✓
-  - Accent (Bright Cyan `oklch(70% 0.15 195)`): Dark text `oklch(20% 0.02 264)` - Ratio 8.9:1 ✓
+  - Light mode: Fundo `oklch(98% 0.005 240)` + Texto `oklch(15% 0.02 240)` - Ratio 18.2:1 ✓
+  - Dark mode: Fundo `oklch(10% 0.02 240)` + Texto `oklch(98% 0.005 240)` - Ratio 19.4:1 ✓
+  - Cyberpunk: Fundo `oklch(8% 0.04 300)` + Texto `oklch(95% 0.08 320)` - Ratio 16.8:1 ✓
+  - Primary button: `oklch(58% 0.24 265)` + Texto Branco `oklch(100% 0 0)` - Ratio 6.2:1 ✓
+  - Accent: `oklch(65% 0.22 180)` + Texto Branco `oklch(100% 0 0)` - Ratio 4.8:1 ✓
 
 ## Font Selection
 

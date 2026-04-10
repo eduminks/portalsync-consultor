@@ -46,7 +46,7 @@ export function Footer() {
               whileHover={{ scale: 1.05 }}
             >
               <img 
-                src={theme === 'dark' ? logoWhite : logoBlack} 
+                src={theme === 'light' ? logoBlack : logoWhite} 
                 alt="PortalSync" 
                 className="h-8 w-auto object-contain"
               />
