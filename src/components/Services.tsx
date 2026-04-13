@@ -1,4 +1,4 @@
-import { Code, Database, GitBranch, ChartBar } from '@phosphor-icons/react'
+import { Database, ChartBar, Headset, Kanban } from '@phosphor-icons/react'
 import { Card } from '@/components/ui/card'
 import { AnimatedSection } from './AnimatedSection'
 import { motion } from 'framer-motion'
@@ -6,28 +6,28 @@ import { useState } from 'react'
 
 const services = [
   {
-    icon: Code,
-    title: 'Desenvolvimento de Software',
-    description:
-      'Criamos aplicações web e desktop modernas e escaláveis, utilizando as melhores e mais atuais tecnologias do mercado para transformar sua visão em realidade digital.',
-  },
-  {
     icon: Database,
-    title: 'Consultoria Senior Sistemas',
+    title: 'Senior ERP & HCM',
     description:
-      'Especialistas em sistemas de gestão empresarial, oferecemos consultoria completa para implementação, customização e otimização de soluções Senior ERP e HCM.',
-  },
-  {
-    icon: GitBranch,
-    title: 'Integrações de Sistemas',
-    description:
-      'Conectamos seus sistemas e plataformas, automatizando processos e garantindo fluxo de dados eficiente entre diferentes aplicações.',
+      'Implantamos, customizamos e otimizamos soluções Senior ERP e HCM com profissionais certificados em LSP — Linguagem Senior de Programação®. Do diagnóstico à entrada em produção com hypercare.',
   },
   {
     icon: ChartBar,
     title: 'Automação Comercial',
     description:
-      'Possuimos uma plataforma completa para Gestão de Relacionamento com Clientes (CRM), Força de Vendas, Gestão de Equipes e Marketing.',
+      'Plataforma completa para Gestão de Relacionamento com Clientes (CRM), Força de Vendas, Gestão de Equipes e Marketing, unificando operação comercial em um único ambiente.',
+  },
+  {
+    icon: Kanban,
+    title: 'Gestão de Projetos',
+    description:
+      'Conduzimos projetos de ponta a ponta com metodologias ágeis e estruturadas, garantindo entregas dentro do prazo, escopo e orçamento — da concepção ao go-live.',
+  },
+  {
+    icon: Headset,
+    title: 'Suporte & Sustentação',
+    description:
+      'Atendimento contínuo com SLA garantido, equipe dedicada e cobertura 24/7. Mantemos seus sistemas estáveis, seguros e evoluindo conforme as necessidades do seu negócio.',
   },
 ]
 
@@ -128,11 +128,11 @@ export function Services() {
             </span>
           </motion.div>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Serviços que Impulsionam seu Negócio
+            Nossas Soluções
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Oferecemos soluções completas em tecnologia, focadas em resultados
-            e inovação para empresas de todos os portes.
+            Produtos e serviços construídos para resolver desafios reais —
+            do ERP ao CRM, da implantação ao suporte contínuo.
           </p>
         </AnimatedSection>
 

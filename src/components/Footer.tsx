@@ -30,8 +30,9 @@ export function Footer() {
   ]
 
   const quickLinks = [
+    { id: 'hero', label: 'Início' },
     { id: 'services', label: 'Serviços' },
-    { id: 'tech', label: 'Tecnologias' },
+    { id: 'tech', label: 'Especialidades' },
     { id: 'about', label: 'Sobre' },
     { id: 'contact', label: 'Contato' },
   ]
@@ -91,7 +92,10 @@ export function Footer() {
                   <motion.button
                     onClick={() => {
                       const element = document.getElementById(link.id)
-                      if (element) element.scrollIntoView({ behavior: 'smooth' })
+                      if (element) {
+                        const y = element.getBoundingClientRect().top + window.scrollY - 80
+                        window.scrollTo({ top: y, behavior: 'smooth' })
+                      }
                     }}
                     className="hover:text-foreground transition-colors relative"
                     whileHover={{ x: 5 }}

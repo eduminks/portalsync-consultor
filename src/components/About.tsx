@@ -112,9 +112,9 @@ export function About() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.6 }}
               >
-                Somos também parceiros e investidores de uma startup de tecnologia
-                focada em aplicativos web inovadores, sempre na vanguarda da
-                transformação digital.
+                Nossa equipe é formada por especialistas apaixonados por inovação, 
+                que unem conhecimento técnico e visão estratégica para criar soluções que 
+                atendem às necessidades únicas de cada cliente.
               </motion.p>
             </div>
           </AnimatedSection>

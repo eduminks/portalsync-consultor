@@ -17,14 +17,14 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
     >
       <div className="absolute inset-0 w-full h-full overflow-hidden">
         <iframe
-          className="absolute top-1/2 left-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.77vh] -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+          className="absolute top-1/2 left-1/2 w-[105vw] h-[59.0625vw] min-h-[105vh] min-w-[186.67vh] -translate-x-1/2 -translate-y-1/2 pointer-events-none border-0 block"
+          style={{ border: 'none', display: 'block' }}
           src="https://www.youtube.com/embed/JqUC1wdy_2c?si=FDwp9iTwF9EAJ8F8&autoplay=1&mute=1&loop=1&playlist=JqUC1wdy_2c&controls=0&showinfo=0&rel=0&modestbranding=1"
           title="YouTube video player"
-          frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerPolicy="strict-origin-when-cross-origin"
           allowFullScreen

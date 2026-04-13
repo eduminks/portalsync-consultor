@@ -44,7 +44,9 @@ export function Header() {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id)
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
+      const headerHeight = 80
+      const y = element.getBoundingClientRect().top + window.scrollY - headerHeight
+      window.scrollTo({ top: y, behavior: 'smooth' })
       setMobileOpen(false)
     }
   }
@@ -52,7 +54,7 @@ export function Header() {
   const navLinks = [
     { label: 'Início', id: 'hero' },
     { label: 'Serviços', id: 'services' },
-    { label: 'Tecnologias', id: 'tech' },
+    { label: 'Especialidades', id: 'tech' },
     { label: 'Sobre', id: 'about' },
     { label: 'Contato', id: 'contact' },
   ]
@@ -99,7 +101,6 @@ export function Header() {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                whileHover={{ scale: 1.05 }}
               >
                 <span className={`relative z-10 font-mono text-sm tracking-wide transition-colors ${
                   activeSection === link.id

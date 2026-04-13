@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
-import { PaperPlaneTilt, Envelope, User, Buildings, Globe } from '@phosphor-icons/react'
+import { PaperPlaneTilt, Envelope, User, Buildings, Phone, MapPin, Clock, WhatsappLogo } from '@phosphor-icons/react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -11,6 +11,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Card } from '@/components/ui/card'
 import { AnimatedSection } from './AnimatedSection'
 import { WorldMap } from './WorldMap'
+import { motion } from 'framer-motion'
 import { toast } from 'sonner'
 import { useKV } from '@github/spark/hooks'
 
@@ -73,10 +74,27 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="pt-0 pb-4 lg:pb-6 relative overflow-hidden bg-background">
+    <section id="contact" className="py-18 lg:py-28 relative overflow-hidden bg-background">
       <WorldMap />
-      
-      <div className="absolute inset-0 bg-gradient-to-br from-background/70 via-background/80 to-background/70 pointer-events-none" style={{ zIndex: 1 }} />
+
+      {/* Gradiente direcional: deixa o mapa respirar no topo e protege o conteúdo abaixo */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          zIndex: 1,
+          background:
+            'linear-gradient(to bottom, hsl(var(--background)/0.25) 0%, hsl(var(--background)/0.55) 30%, hsl(var(--background)/0.78) 65%, hsl(var(--background)/0.95) 100%)',
+        }}
+      />
+      {/* Vinheta lateral suave */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          zIndex: 1,
+          background:
+            'radial-gradient(ellipse 80% 100% at 50% 0%, transparent 40%, hsl(var(--background)/0.6) 100%)',
+        }}
+      />
       
       <div className="container mx-auto px-6 lg:px-12 relative" style={{ zIndex: 2 }}>
         <AnimatedSection className="text-center mb-8">
@@ -97,69 +115,74 @@ export function Contact() {
 
         <div className="grid lg:grid-cols-2 gap-8 items-start">
           <AnimatedSection delay={0.1} className="space-y-4">
-            <div className="flex items-start gap-3">
-              <div className="p-2.5 rounded-xl bg-card/80 backdrop-blur-sm border border-primary/30">
-                <Globe size={28} weight="duotone" className="text-primary" />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold mb-1.5">Integrações Globais</h3>
-                <p className="text-muted-foreground text-sm">
-                  Conectamos sistemas e plataformas ao redor do mundo, criando soluções integradas
-                  que impulsionam seu negócio.
-                </p>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-3 pt-2">
-              <div className="p-4 rounded-xl bg-card/80 border border-border backdrop-blur-sm">
-                <div className="text-2xl font-bold bg-gradient-to-br from-primary to-accent bg-clip-text text-transparent mb-1">
-                  100+
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  Projetos Entregues
-                </div>
-              </div>
-
-              <div className="p-4 rounded-xl bg-card/80 border border-border backdrop-blur-sm">
-                <div className="text-2xl font-bold bg-gradient-to-br from-primary to-accent bg-clip-text text-transparent mb-1">
-                  50+
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  Clientes Satisfeitos
-                </div>
-              </div>
-
-              <div className="p-4 rounded-xl bg-card/80 border border-border backdrop-blur-sm">
-                <div className="text-2xl font-bold bg-gradient-to-br from-primary to-accent bg-clip-text text-transparent mb-1">
-                  24/7
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  Suporte Técnico
-                </div>
-              </div>
-
-              <div className="p-4 rounded-xl bg-card/80 border border-border backdrop-blur-sm">
-                <div className="text-2xl font-bold bg-gradient-to-br from-primary to-accent bg-clip-text text-transparent mb-1">
-                  10+
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  Anos de Experiência
-                </div>
-              </div>
-            </div>
-
-            <div className="p-4 rounded-xl bg-card/80 border border-accent/30 backdrop-blur-sm">
-              <p className="text-xs text-muted-foreground italic">
-                "A PortalSync transformou completamente nossa operação. As integrações desenvolvidas
-                aumentaram nossa eficiência em 300% e reduziram erros para praticamente zero."
+            <div>
+              <h3 className="text-2xl font-bold mb-2">Fale com a gente</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Seja para tirar dúvidas, solicitar um orçamento ou iniciar um projeto,
+                nossa equipe está pronta para atender você.
               </p>
-              <div className="mt-3 flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-accent" />
-                <div>
-                  <div className="font-semibold text-xs">João Silva</div>
-                  <div className="text-[10px] text-muted-foreground">CEO, TechCorp</div>
-                </div>
-              </div>
+            </div>
+
+            <div className="space-y-3">
+              {[
+                {
+                  icon: Envelope,
+                  label: 'E-mail',
+                  value: 'contato@portalsync.com.br',
+                  href: 'mailto:contato@portalsync.com.br',
+                },
+                {
+                  icon: Phone,
+                  label: 'Telefone',
+                  value: '+55 (47) 9999-9999',
+                  href: 'tel:+554799999999',
+                },
+                {
+                  icon: WhatsappLogo,
+                  label: 'WhatsApp',
+                  value: '+55 (47) 9999-9999',
+                  href: 'https://wa.me/554799999999',
+                },
+                {
+                  icon: MapPin,
+                  label: 'Localização',
+                  value: 'Blumenau, SC — Brasil',
+                  href: null,
+                },
+                {
+                  icon: Clock,
+                  label: 'Horário de Atendimento',
+                  value: 'Seg–Sex, das 8h às 18h',
+                  href: null,
+                },
+              ].map(({ icon: Icon, label, value, href }, i) => (
+                <motion.div
+                  key={label}
+                  initial={{ opacity: 0, x: -16 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.4, delay: 0.1 + i * 0.08 }}
+                  className="flex items-center gap-3 p-3.5 rounded-xl bg-card/80 border border-border backdrop-blur-sm hover:border-primary/40 transition-colors group"
+                >
+                  <div className="p-2 rounded-lg bg-gradient-to-br from-primary/20 to-accent/20 shrink-0">
+                    <Icon size={20} weight="duotone" className="text-primary" />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="text-[10px] text-muted-foreground uppercase tracking-wider mb-0.5">{label}</div>
+                    {href ? (
+                      <a
+                        href={href}
+                        target={href.startsWith('http') ? '_blank' : undefined}
+                        rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                        className="text-sm font-medium hover:text-primary transition-colors truncate block"
+                      >
+                        {value}
+                      </a>
+                    ) : (
+                      <span className="text-sm font-medium">{value}</span>
+                    )}
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </AnimatedSection>
 
@@ -248,9 +271,11 @@ export function Contact() {
                             </FormControl>
                             <SelectContent>
                               <SelectItem value="desenvolvimento">Desenvolvimento de Software</SelectItem>
-                              <SelectItem value="erp">Consultoria em ERPs</SelectItem>
-                              <SelectItem value="integracoes">Integrações de Sistemas</SelectItem>
+                              <SelectItem value="erp">Consultoria Senior ERP & HCM</SelectItem>
+                              <SelectItem value="integracoes">Integração de Sistemas</SelectItem>
                               <SelectItem value="automacao">Automação Comercial</SelectItem>
+                              <SelectItem value="projetos">Gestão de Projetos</SelectItem>
+                              <SelectItem value="suporte">Suporte & Sustentação</SelectItem>
                               <SelectItem value="outro">Outro</SelectItem>
                             </SelectContent>
                           </Select>

@@ -1,179 +1,127 @@
-import { useEffect, useRef } from 'react'
 import { useTheme } from '@/hooks/use-theme'
+import { motion } from 'framer-motion'
 import mapImage from '@/assets/images/MAPA_MUNDI_AZUL.png'
 
-interface Connection {
-  from: { x: number; y: number }
-  to: { x: number; y: number }
-  delay: number
-  duration: number
-}
-
+// Coordenadas aproximadas num viewBox 100×56 (proporcional ao mapa)
 const cities = [
-  { x: 18, y: 18, name: 'New York' },
-  { x: 12, y: 12, name: 'Vancouver' },
-  { x: 26, y: 38, name: 'São Paulo' },
-  { x: 48, y: 16, name: 'London' },
-  { x: 50, y: 18, name: 'Paris' },
-  { x: 55, y: 22, name: 'Cairo' },
-  { x: 62, y: 20, name: 'Dubai' },
-  { x: 70, y: 22, name: 'Mumbai' },
-  { x: 78, y: 20, name: 'Singapore' },
-  { x: 85, y: 16, name: 'Tokyo' },
-  { x: 88, y: 42, name: 'Sydney' },
-  { x: 56, y: 40, name: 'Cape Town' },
+  { x: 20, y: 22 }, // 0  New York
+  { x: 14, y: 15 }, // 1  Vancouver
+  { x: 28, y: 42 }, // 2  São Paulo
+  { x: 48, y: 19 }, // 3  London
+  { x: 55, y: 26 }, // 4  Cairo
+  { x: 63, y: 24 }, // 5  Dubai
+  { x: 70, y: 27 }, // 6  Mumbai
+  { x: 79, y: 33 }, // 7  Singapore
+  { x: 86, y: 22 }, // 8  Tokyo
+  { x: 88, y: 46 }, // 9  Sydney
+  { x: 56, y: 44 }, // 10 Cape Town
 ]
 
-const generateConnections = (): Connection[] => {
-  const connections: Connection[] = []
-  
-  const pairs = [
-    [0, 1], [0, 2], [0, 3], [1, 9],
-    [2, 3], [2, 11], [3, 4], [3, 5],
-    [4, 6], [5, 6], [6, 7], [7, 8],
-    [8, 9], [9, 10], [8, 10], [5, 11],
-  ]
-  
-  pairs.forEach(([i, j]) => {
-    connections.push({
-      from: { x: cities[i].x, y: cities[i].y },
-      to: { x: cities[j].x, y: cities[j].y },
-      delay: Math.random() * 5,
-      duration: 3 + Math.random() * 2,
-    })
-  })
-  
-  return connections
+const pairs = [
+  [0, 3], [0, 2], [1, 8],
+  [2, 10], [3, 4], [4, 5],
+  [5, 6], [6, 7], [7, 8],
+  [8, 9], [4, 10], [3, 8],
+]
+
+function arcPath(i: number, j: number): string {
+  const a = cities[i]
+  const b = cities[j]
+  const cx = (a.x + b.x) / 2
+  const cy = (a.y + b.y) / 2
+  const dist = Math.hypot(b.x - a.x, b.y - a.y)
+  const arch = dist * 0.28
+  return `M${a.x},${a.y} Q${cx},${cy - arch} ${b.x},${b.y}`
 }
 
 export function WorldMap() {
-  const connections = useRef(generateConnections()).current
-  const svgRef = useRef<SVGSVGElement>(null)
   const { theme } = useTheme()
-
-  useEffect(() => {
-    if (!svgRef.current) return
-
-    const svg = svgRef.current
-    const lines = svg.querySelectorAll('.animated-line')
-    
-    lines.forEach((line, index) => {
-      const element = line as SVGLineElement
-      const connection = connections[index]
-      if (!connection) return
-
-      const length = Math.sqrt(
-        Math.pow(connection.to.x - connection.from.x, 2) +
-          Math.pow(connection.to.y - connection.from.y, 2)
-      )
-
-      element.style.strokeDasharray = `${length}`
-      element.style.strokeDashoffset = `${length}`
-
-      const animate = () => {
-        element.animate(
-          [
-            { strokeDashoffset: length },
-            { strokeDashoffset: 0 },
-            { strokeDashoffset: -length }
-          ],
-          {
-            duration: connection.duration * 1000,
-            delay: connection.delay * 1000,
-            iterations: Infinity,
-            easing: 'linear'
-          }
-        )
-      }
-
-      setTimeout(animate, 0)
-    })
-  }, [connections])
-
-  const mapOpacity = theme === 'dark' ? 0.35 : 0.25
-  const connectionOpacity = theme === 'dark' ? 0.6 : 0.5
+  const isDark = theme === 'dark'
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 0 }}>
-      <div 
-        className="absolute inset-0 bg-center bg-no-repeat bg-contain"
+      {/* Mapa: bg-cover para preencher toda a seção */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: `url(${mapImage})`,
-          opacity: mapOpacity,
-          filter: theme === 'dark' ? 'brightness(0.8)' : 'brightness(1.1)',
+          opacity: isDark ? 0.18 : 0.12,
+          filter: 'saturate(0.45) brightness(1.15)',
         }}
       />
+
       <svg
-        ref={svgRef}
-        className="w-full h-full absolute inset-0"
-        viewBox="0 0 100 50"
+        className="absolute inset-0 w-full h-full"
+        viewBox="0 0 100 56"
         preserveAspectRatio="xMidYMid slice"
       >
         <defs>
-          <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="var(--primary)" stopOpacity={connectionOpacity * 0.5} />
-            <stop offset="50%" stopColor="var(--accent)" stopOpacity={connectionOpacity} />
-            <stop offset="100%" stopColor="var(--primary)" stopOpacity={connectionOpacity * 0.5} />
-          </linearGradient>
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="0.1" result="coloredBlur" />
+          <filter id="wm-glow" x="-80%" y="-80%" width="260%" height="260%">
+            <feGaussianBlur stdDeviation="0.3" result="blur" />
             <feMerge>
-              <feMergeNode in="coloredBlur" />
+              <feMergeNode in="blur" />
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
+          <linearGradient id="wm-line" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="100" y2="0">
+            <stop offset="0%"   stopColor="var(--primary)" stopOpacity="0.1" />
+            <stop offset="45%"  stopColor="var(--accent)"  stopOpacity="0.95" />
+            <stop offset="55%"  stopColor="var(--primary)" stopOpacity="0.95" />
+            <stop offset="100%" stopColor="var(--accent)"  stopOpacity="0.1" />
+          </linearGradient>
         </defs>
 
-        {connections.map((connection, index) => (
-          <line
-            key={index}
-            className="animated-line"
-            x1={connection.from.x}
-            y1={connection.from.y}
-            x2={connection.to.x}
-            y2={connection.to.y}
-            stroke="url(#lineGradient)"
-            strokeWidth="0.15"
-            filter="url(#glow)"
+        {/* Arcos animados: draw-in → hold → fade-out em loop */}
+        {pairs.map(([i, j], idx) => (
+          <motion.path
+            key={idx}
+            d={arcPath(i, j)}
+            fill="none"
+            stroke="url(#wm-line)"
+            strokeWidth="0.22"
+            strokeLinecap="round"
+            filter="url(#wm-glow)"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{
+              pathLength: [0, 1, 1, 0],
+              opacity:    [0, 0.9, 0.75, 0],
+            }}
+            transition={{
+              duration:    5,
+              delay:       idx * 0.5,
+              repeat:      Infinity,
+              repeatDelay: 1,
+              ease:        'easeInOut',
+            }}
           />
         ))}
 
-        {cities.map((city, index) => (
-          <g key={index}>
-            <circle
-              cx={city.x}
-              cy={city.y}
-              r="0.3"
+        {/* Pontos de cidade com duplo anel pulsante */}
+        {cities.map((c, i) => (
+          <g key={i}>
+            <motion.circle
+              cx={c.x} cy={c.y} r={0.38}
               fill="var(--accent)"
-              opacity={connectionOpacity}
-              filter="url(#glow)"
+              filter="url(#wm-glow)"
+              animate={{ opacity: [0.55, 1, 0.55], scale: [1, 1.15, 1] }}
+              transition={{ duration: 2.5 + i * 0.1, delay: i * 0.18, repeat: Infinity, ease: 'easeInOut' }}
             />
-            <circle
-              cx={city.x}
-              cy={city.y}
-              r="0.5"
-              fill="none"
-              stroke="var(--accent)"
-              strokeWidth="0.08"
-              opacity={connectionOpacity * 0.5}
-            >
-              <animate
-                attributeName="r"
-                from="0.5"
-                to="1"
-                dur="2s"
-                begin={`${index * 0.3}s`}
-                repeatCount="indefinite"
-              />
-              <animate
-                attributeName="opacity"
-                from={connectionOpacity * 0.5}
-                to="0"
-                dur="2s"
-                begin={`${index * 0.3}s`}
-                repeatCount="indefinite"
-              />
-            </circle>
+            {/* Anel 1 */}
+            <motion.circle
+              cx={c.x} cy={c.y}
+              fill="none" stroke="var(--accent)" strokeWidth="0.09"
+              initial={{ r: 0.38, opacity: 0.65 }}
+              animate={{ r: [0.38, 1.6], opacity: [0.65, 0] }}
+              transition={{ duration: 2.8, delay: i * 0.18, repeat: Infinity, ease: 'easeOut' }}
+            />
+            {/* Anel 2 (defasado) */}
+            <motion.circle
+              cx={c.x} cy={c.y}
+              fill="none" stroke="var(--primary)" strokeWidth="0.06"
+              initial={{ r: 0.38, opacity: 0.4 }}
+              animate={{ r: [0.38, 2.2], opacity: [0.4, 0] }}
+              transition={{ duration: 3.2, delay: i * 0.18 + 1, repeat: Infinity, ease: 'easeOut' }}
+            />
           </g>
         ))}
       </svg>

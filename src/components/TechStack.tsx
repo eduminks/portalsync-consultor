@@ -1,66 +1,65 @@
 import { AnimatedSection } from './AnimatedSection'
 import { motion } from 'framer-motion'
 import { Card } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 import {
   Code,
-  Database,
-  Cloud,
-  GitBranch,
-  Plugs,
+  CurrencyDollar,
+  TrendUp,
+  Rocket,
+  Gear,
+  Globe,
   Briefcase,
   CheckCircle,
-  Cpu,
 } from '@phosphor-icons/react'
 
-const stackCards = [
+const specialtyCards = [
   {
-    icon: Code,
-    title: 'Frontend',
-    color: 'from-blue-500 to-cyan-400',
-    border: 'border-blue-500/30',
-    glow: 'hover:shadow-blue-500/20',
-    items: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Next.js'],
-  },
-  {
-    icon: Cpu,
-    title: 'Backend',
-    color: 'from-violet-500 to-purple-400',
-    border: 'border-violet-500/30',
-    glow: 'hover:shadow-violet-500/20',
-    items: ['Node.js', 'Python', 'Java', 'Microservices', 'CI/CD'],
-  },
-  {
-    icon: Database,
-    title: 'Banco de Dados',
-    color: 'from-orange-500 to-amber-400',
-    border: 'border-orange-500/30',
-    glow: 'hover:shadow-orange-500/20',
-    items: ['Oracle', 'SQL Server', 'PostgreSQL', 'MongoDB'],
-  },
-  {
-    icon: Plugs,
-    title: 'APIs & Integrações',
+    icon: CurrencyDollar,
+    title: 'Redução De Custos',
     color: 'from-green-500 to-emerald-400',
     border: 'border-green-500/30',
     glow: 'hover:shadow-green-500/20',
-    items: ['REST APIs', 'SOAP APIs', 'GraphQL', 'Webhooks', 'EDI'],
+    description: 'Desenvolvemos soluções tecnológicas que reduzem custos operacionais, eliminam desperdícios e aumentam a eficiência dos processos, garantindo maior rentabilidade para o seu negócio.',
   },
   {
-    icon: Cloud,
-    title: 'Cloud & DevOps',
-    color: 'from-sky-500 to-blue-400',
-    border: 'border-sky-500/30',
-    glow: 'hover:shadow-sky-500/20',
-    items: ['AWS', 'Azure', 'Docker', 'Kubernetes', 'Git'],
+    icon: TrendUp,
+    title: 'Aumento De Produtividade',
+    color: 'from-blue-500 to-cyan-400',
+    border: 'border-blue-500/30',
+    glow: 'hover:shadow-blue-500/20',
+    description: 'Criamos sistemas que otimizam fluxos de trabalho, automatizam tarefas repetitivas e liberam sua equipe para focar no que realmente importa: gerar resultados e impulsionar a produtividade.',
   },
   {
-    icon: GitBranch,
-    title: 'Sistemas & Plataformas',
+    icon: Code,
+    title: 'Desenvolvimento De Software',
+    color: 'from-violet-500 to-purple-400',
+    border: 'border-violet-500/30',
+    glow: 'hover:shadow-violet-500/20',
+    description: 'Transformamos ideias em softwares personalizados, escaláveis e seguros, projetados para atender às necessidades específicas de cada empresa e acelerar sua evolução digital.',
+  },
+  {
+    icon: Rocket,
+    title: 'Eficiência E Inovação',
+    color: 'from-orange-500 to-amber-400',
+    border: 'border-orange-500/30',
+    glow: 'hover:shadow-orange-500/20',
+    description: 'Aplicamos tecnologia de forma estratégica para conectar pessoas, processos e resultados, oferecendo soluções inovadoras que simplificam a gestão e geram crescimento sustentável.',
+  },
+  {
+    icon: Gear,
+    title: 'Integração De Sistemas',
     color: 'from-rose-500 to-pink-400',
     border: 'border-rose-500/30',
     glow: 'hover:shadow-rose-500/20',
-    items: ['Senior ERP', 'Senior HCM', 'RD Station CRM', 'Plataforma GoCli'],
+    description: 'Somos especialistas em mensageiros, Webservices REST/SOAP e em desenvolvimento de soluções personalizadas para integração de diferentes sistemas independente da complexidade.',
+  },
+  {
+    icon: Globe,
+    title: 'Transformação Digital',
+    color: 'from-sky-500 to-blue-400',
+    border: 'border-sky-500/30',
+    glow: 'hover:shadow-sky-500/20',
+    description: 'Impulsionamos empresas na jornada da transformação digital, tornando processos mais ágeis, inteligentes e preparados para os desafios do futuro.',
   },
 ]
 
@@ -74,30 +73,50 @@ const consultingServices = [
 export function TechStack() {
   return (
     <section id="tech" className="py-16 lg:py-20 relative overflow-hidden">
+      {/* Dot grid */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--accent)_1px,transparent_1px)] bg-[length:32px_32px] opacity-[0.05]" />
+
+      {/* Animated background orbs */}
+      <motion.div
+        className="absolute top-10 right-10 w-80 h-80 rounded-full bg-gradient-to-br from-primary/10 to-accent/10 blur-3xl pointer-events-none"
+        animate={{
+          scale: [1, 1.25, 1],
+          opacity: [0.25, 0.45, 0.25],
+        }}
+        transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
+      />
+      <motion.div
+        className="absolute bottom-16 left-8 w-72 h-72 rounded-full bg-gradient-to-br from-accent/10 to-primary/10 blur-3xl pointer-events-none"
+        animate={{
+          scale: [1, 1.3, 1],
+          opacity: [0.2, 0.4, 0.2],
+        }}
+        transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+      />
+      <motion.div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-56 rounded-full bg-gradient-to-r from-primary/5 to-accent/5 blur-3xl pointer-events-none"
+        animate={{
+          x: [0, 40, -40, 0],
+          y: [0, -20, 20, 0],
+          opacity: [0.15, 0.3, 0.15],
+        }}
+        transition={{ duration: 16, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+      />
 
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
         <AnimatedSection className="text-center mb-12">
-          <motion.div
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-4 backdrop-blur-sm"
-            whileHover={{ scale: 1.05 }}
-          >
-            <span className="text-xs font-mono uppercase tracking-wider text-accent">
-              Stack Tecnológico
-            </span>
-          </motion.div>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Tecnologias de Ponta
+            Somos Especialistas Em...
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Trabalhamos com as ferramentas mais modernas e robustas do mercado
-            para garantir soluções de alta qualidade e performance.
+            Combinamos expertise técnica e visão de negócio para entregar soluções
+            que geram resultados reais e duradouros para cada cliente.
           </p>
         </AnimatedSection>
 
-        {/* Stack Cards Grid */}
+        {/* Specialty Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
-          {stackCards.map((card, i) => {
+          {specialtyCards.map((card, i) => {
             const Icon = card.icon
             return (
               <AnimatedSection key={card.title} delay={i * 0.07}>
@@ -115,17 +134,9 @@ export function TechStack() {
                       </div>
                       <h3 className="font-bold text-base">{card.title}</h3>
                     </div>
-                    <div className="flex flex-wrap gap-2">
-                      {card.items.map((item) => (
-                        <Badge
-                          key={item}
-                          variant="secondary"
-                          className="text-xs font-medium px-2.5 py-1 bg-muted/60 hover:bg-accent/20 hover:text-accent transition-colors cursor-default"
-                        >
-                          {item}
-                        </Badge>
-                      ))}
-                    </div>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {card.description}
+                    </p>
                   </Card>
                 </motion.div>
               </AnimatedSection>
