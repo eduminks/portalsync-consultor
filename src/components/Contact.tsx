@@ -128,25 +128,19 @@ export function Contact() {
                 {
                   icon: Envelope,
                   label: 'E-mail',
-                  value: 'contato@portalsync.com.br',
-                  href: 'mailto:contato@portalsync.com.br',
-                },
-                {
-                  icon: Phone,
-                  label: 'Telefone',
-                  value: '+55 (47) 9999-9999',
-                  href: 'tel:+554799999999',
+                  value: 'eduardo.minks@portalsync.com.br',
+                  href: 'mailto:eduardo.minks@portalsync.com.br',
                 },
                 {
                   icon: WhatsappLogo,
                   label: 'WhatsApp',
-                  value: '+55 (47) 9999-9999',
-                  href: 'https://wa.me/554799999999',
+                  value: '+55 (49) 99962-7921',
+                  href: 'https://wa.me/5549999627921',
                 },
                 {
                   icon: MapPin,
                   label: 'Localização',
-                  value: 'Blumenau, SC — Brasil',
+                  value: 'Concórdia, SC — Brasil',
                   href: null,
                 },
                 {

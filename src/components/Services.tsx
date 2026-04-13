@@ -124,7 +124,7 @@ export function Services() {
             whileHover={{ scale: 1.05 }}
           >
             <span className="text-xs font-mono uppercase tracking-wider text-primary">
-              Nossas Especialidades
+              Serviços
             </span>
           </motion.div>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">

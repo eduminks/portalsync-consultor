@@ -25,8 +25,8 @@ export function Footer() {
 
   const socialLinks = [
     { icon: GithubLogo, href: 'https://github.com', label: 'GitHub' },
-    { icon: LinkedinLogo, href: 'https://linkedin.com', label: 'LinkedIn' },
-    { icon: EnvelopeSimple, href: 'mailto:contato@portalsync.com.br', label: 'Email' },
+    { icon: LinkedinLogo, href: 'https://br.linkedin.com/in/eduardo-minks', label: 'LinkedIn' },
+    { icon: EnvelopeSimple, href: 'mailto:eduardo.minks@portalsync.com.br', label: 'Email' },
   ]
 
   const quickLinks = [
