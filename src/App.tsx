@@ -8,6 +8,7 @@ import { Contact } from '@/components/Contact'
 import { Footer } from '@/components/Footer'
 import { ScrollProgress } from '@/components/ScrollProgress'
 import { ScrollToTop } from '@/components/ScrollToTop'
+import { WhatsAppButton } from '@/components/WhatsAppButton'
 import { SectionDivider } from '@/components/SectionDivider'
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
       </main>
       <Footer />
       <ScrollToTop />
+      <WhatsAppButton />
       <Toaster />
     </div>
   )

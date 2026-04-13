@@ -158,7 +158,7 @@ export function Footer() {
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          <p>© {currentYear} PortalSync. Todos os direitos reservados.</p>
+          <p>© {currentYear} PortalSync Web Solutions - 53.174.663/0001-99. Todos os direitos reservados.</p>
         </motion.div>
       </div>
     </footer>
