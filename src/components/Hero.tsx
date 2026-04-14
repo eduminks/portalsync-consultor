@@ -67,7 +67,7 @@ export function Hero() {
             className="text-xl md:text-2xl text-muted-foreground mb-12 leading-relaxed max-w-3xl mx-auto"
           >
             Especialistas em desenvolvimento de software, integrações de sistemas,
-            ERPs e automação comercial. Levamos sua empresa para o próximo nível.
+            ERPs e automações. Levamos sua empresa para o próximo nível.
           </motion.p>
 
           <motion.div

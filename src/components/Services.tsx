@@ -9,13 +9,13 @@ const services = [
     icon: Database,
     title: 'Senior ERP & HCM',
     description:
-      'Implantamos, customizamos e otimizamos soluções Senior ERP e HCM com profissionais certificados em LSP — Linguagem Senior de Programação®. Do diagnóstico à entrada em produção com hypercare.',
+      'Somos especialistas em desenvolver soluções sob medida e personalizadas para cada cliente, garantindo a maior eficiência e aderência às necessidades específicas de cada negócio.',
   },
   {
     icon: ChartBar,
     title: 'Automação Comercial',
     description:
-      'Plataforma completa para Gestão de Relacionamento com Clientes (CRM), Força de Vendas, Gestão de Equipes e Marketing, unificando operação comercial em um único ambiente.',
+      'Plataforma completa para Gestão de Relacionamento com Clientes (CRM), Força de Vendas, Gestão de Equipes e Tarefas, unificando operação comercial em um único ambiente.',
   },
   {
     icon: Kanban,
