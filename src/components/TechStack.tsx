@@ -66,7 +66,7 @@ const specialtyCards = [
 const consultingServices = [
   { label: 'Implantação', description: 'Desenvolvimento, implantação e hypercare de soluções customizadas.' },
   { label: 'Consultoria Sistemas Senior', description: 'Somos especialistas em soluções Senior ERP e HCM.' },
-  { label: 'LSP', description: 'Profissionais certificados Linguagem Senior de Programação®.' },
+  { label: 'LSP®', description: 'Profissionais certificados Linguagem Senior de Programação®.' },
   { label: 'Suporte e Sustentação', description: 'Atendimento contínuo, SLA garantido 24/7.' },
 ]
 

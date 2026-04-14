@@ -105,7 +105,7 @@ export function About() {
               >
                 Nossa expertise abrange desde o desenvolvimento de software
                 personalizado até a integração complexa de sistemas empresariais,
-                ERPs e plataformas de automação comercial.
+                ERPs, plataformas de automação e e-commerce.
               </motion.p>
               <motion.p
                 initial={{ opacity: 0, x: -20 }}
