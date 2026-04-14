@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
+import emailjs from '@emailjs/browser'
 import { PaperPlaneTilt, Envelope, User, Buildings, Phone, MapPin, Clock, WhatsappLogo } from '@phosphor-icons/react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -13,7 +14,6 @@ import { AnimatedSection } from './AnimatedSection'
 import { WorldMap } from './WorldMap'
 import { motion } from 'framer-motion'
 import { toast } from 'sonner'
-import { useKV } from '@github/spark/hooks'
 
 const formSchema = z.object({
   name: z.string().min(2, 'Nome deve ter pelo menos 2 caracteres'),
@@ -25,14 +25,18 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>
 
-interface ContactSubmission extends FormData {
-  id: string
-  timestamp: string
+const SERVICE_MAP: Record<string, string> = {
+  desenvolvimento: 'Desenvolvimento de Software',
+  erp: 'Consultoria Senior ERP & HCM',
+  integracoes: 'Integração de Sistemas',
+  automacao: 'Automação Comercial',
+  projetos: 'Gestão de Projetos',
+  suporte: 'Suporte & Sustentação',
+  outro: 'Outro',
 }
 
 export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submissions, setSubmissions] = useKV<ContactSubmission[]>('contact-submissions', [])
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -47,22 +51,26 @@ export function Contact() {
 
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true)
-    
+
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      
-      const submission: ContactSubmission = {
-        ...data,
-        id: Date.now().toString(),
-        timestamp: new Date().toISOString(),
-      }
-      
-      setSubmissions((current) => [...(current || []), submission])
-      
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        {
+          from_name: data.name,
+          from_email: data.email,
+          company: data.company || 'Não informado',
+          service: SERVICE_MAP[data.service] ?? data.service,
+          message: data.message,
+          to_email: 'eduardo.minks@portalsync.com.br',
+        },
+        { publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY },
+      )
+
       toast.success('Mensagem enviada com sucesso!', {
         description: 'Entraremos em contato em breve.',
       })
-      
+
       form.reset()
     } catch (error) {
       toast.error('Erro ao enviar mensagem', {
