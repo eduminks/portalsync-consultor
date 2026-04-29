@@ -52,10 +52,23 @@ export function Contact() {
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true)
 
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+
+    if (!serviceId || !templateId || !publicKey) {
+      console.error('[Contact] EmailJS env vars ausentes:', { serviceId: !!serviceId, templateId: !!templateId, publicKey: !!publicKey })
+      toast.error('Configuração de e-mail indisponível', {
+        description: 'Entre em contato pelo WhatsApp ou e-mail direto.',
+      })
+      setIsSubmitting(false)
+      return
+    }
+
     try {
       await emailjs.send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        serviceId,
+        templateId,
         {
           from_name: data.name,
           from_email: data.email,
@@ -64,7 +77,7 @@ export function Contact() {
           message: data.message,
           to_email: 'eduardo.minks@portalsync.com.br',
         },
-        { publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY },
+        { publicKey },
       )
 
       toast.success('Mensagem enviada com sucesso!', {
@@ -72,9 +85,11 @@ export function Contact() {
       })
 
       form.reset()
-    } catch (error) {
+    } catch (error: unknown) {
+      console.error('[Contact] Erro ao enviar via EmailJS:', error)
+      const detail = error instanceof Error ? error.message : JSON.stringify(error)
       toast.error('Erro ao enviar mensagem', {
-        description: 'Por favor, tente novamente.',
+        description: `Tente novamente ou entre em contato pelo WhatsApp. (${detail})`,
       })
     } finally {
       setIsSubmitting(false)
